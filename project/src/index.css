@@ -11,3 +11,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.heartFav{
+  width: 5vmin;
+  height: 5vmin;
+  float: right;
+  
+  
+}
+
+.heartFav:hover{
+  color: #F27457; 
+
+}
+
+.primary {
+  color: #03A696;
+}
