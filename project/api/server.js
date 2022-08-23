@@ -15,7 +15,8 @@ app.use(morgan("tiny"));
 
 app.use("/api", routes);
 
-
+db.sync({ force: false }).then(() => {
   app.listen(envs.PORT, () =>
     console.log(`Servidor escuchando en el puerto ${envs.PORT}`)
   );
+})
