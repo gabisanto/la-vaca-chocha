@@ -1,17 +1,21 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import ProductsCard from "./components/ProductsCard";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import NotFound from "./components/NotFound";
 import CreateProduct from "./components/CreateProduct";
 import EditProduct from "./components/EditProduct";
 
+
 const App = () => {
   return (
     <div>
       {/* <Navbar /> */}
       <div>
+      
+        <ProductsCard/>
         <Routes>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
