@@ -4,4 +4,3 @@ module.exports = {
   DB_HOST: "vaca-chocha",
   SECRET: process.env.SECRET || "grupo1",
 };
-å

@@ -6,7 +6,6 @@ const app = express();
 const models = require("./models")
 
 const routes = require("./routes");
-const db = require("./config/db");
 const envs = require("./config/envs");
 
 app.use(express.json());
