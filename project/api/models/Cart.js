@@ -6,7 +6,7 @@ class Cart extends Sequelize.Model {}
 Cart.init(
     {
       products: {
-        type: Sequelize.ARRAY,
+        type: Sequelize.ARRAY(Sequelize.TEXT),
         allowNull: true,
       },
       amount: {
