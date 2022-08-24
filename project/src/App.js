@@ -1,20 +1,20 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import ProductsCard from "./components/ProductsCard";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import NotFound from "./components/NotFound";
 import CreateProduct from "./components/CreateProduct";
 import EditProduct from "./components/EditProduct";
-import Cart from "./components/Cart/Cart";
+
 
 const App = () => {
   return (
     <div>
       {/* <Navbar /> */}
       <div>
-        <ProductsCard />
+      
+        <ProductsCard/>
         <Routes>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
@@ -30,8 +30,14 @@ const App = () => {
           <Route path="categories/:category"> element={<Category />
           {user && <Route path="profile" element={<Profile />} />}
            */}
+          <Route path="product/:id" element={<ProductsCard/>} />
+          <Route path="product" element={<ShowProducts/>} />
+          <Route path="product/search" element={<Search/>} />
         </Routes>
       </div>
+      <div className="footer">
+  <p>La vaca chocha, realizado por alumn@s de Plataforma 5</p>
+</div>
     </div>
   );
 };
