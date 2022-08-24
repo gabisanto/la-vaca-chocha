@@ -21,7 +21,7 @@ Products.init(
         type: Sequelize.STRING,
         allowNull: false,
       },
-    
+
     },
     { sequelize: db, modelName: "products" }
   );

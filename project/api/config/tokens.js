@@ -11,3 +11,7 @@ const validateToken = (token) => {
 };
 
 module.exports = { generateToken, validateToken };
+
+
+
+

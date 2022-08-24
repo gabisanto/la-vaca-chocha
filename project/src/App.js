@@ -6,9 +6,6 @@ import Register from "./components/Register";
 import NotFound from "./components/NotFound";
 import CreateProduct from "./components/CreateProduct";
 import EditProduct from "./components/EditProduct";
-import ProductsCard from "./components/ProductsCard";
-import ShowProducts from "./components/ShowProducts";
-import Search from "./components/Search";
 
 
 const App = () => {
@@ -17,10 +14,11 @@ const App = () => {
       {/* <Navbar /> */}
       <div>
       
-       
+        <ProductsCard/>
         <Routes>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="cart" element={<Cart />} />
           <Route path="404" element={<NotFound />} />
           {/* ruta de admin */}
           <Route path="product/create" element={<CreateProduct />} />
