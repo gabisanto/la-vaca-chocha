@@ -32,7 +32,7 @@ router.delete('/:id',function(req,res,next){
         where: {
             id : req.params.id
         }
-    })
+    }).then((user)=> res.sendStatus(202))
 })
 
 router.put('/:id',function(req,res,next){
