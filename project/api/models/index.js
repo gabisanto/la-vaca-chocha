@@ -2,10 +2,19 @@ const Users = require("./Users");
 const Products = require("./Products");
 const Cart = require("./Products");
 const Categories = require("./Categories");
+const Favorites = require("./Favorites");
 
 Products.belongsTo(Users);
-Products.belongsTo(Cart)
-Products.belongsTo(Categories)
-Users.hasOne(Cart)
+Users.hasMany(Products);
+Users.hasOne(Cart);
+Cart.belongsTo(Users);
+Products.belongsTo(Categories);
 
-module.exports = { Users, Products, Cart, Categories};
+Products.belongsToMany(Cart, { through: "cartItems", as: "cartProducts" });
+Cart.belongsToMany(Products, { through: "cartItems", as: "productsCart" });
+
+
+Favorites.belongsToMany(Users, { through: "userFavorites", as: "favorites" });
+Users.belongsToMany(Favorites, { through: "userFavorites", as: "favorites" });
+
+module.exports = { Users, Products, Cart, Categories };
