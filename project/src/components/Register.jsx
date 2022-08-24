@@ -7,7 +7,7 @@ import back from "../assets/backusers.jpg";
 import AlertMessage from "../commons/AlertMessage";
 import styles from "../styles/userpages.module.css";
 import { TextField, Container, Box, Button } from "@mui/material";
-import { AccountCircle, Password, Email, Send } from "@mui/icons-material";
+import { AccountCircle, Password, Email } from "@mui/icons-material";
 
 const Register = () => {
   /* comienzo useNavigate */
@@ -26,10 +26,10 @@ const Register = () => {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    /* axios
-      .post(" api endpoint ", data) */
-    /* manejo errores */
-    /* .then(({ data }) => {
+    axios
+      .post("http://localhost:3001/api/users", data)
+      /* manejo errores */
+      .then(({ data }) => {
         if (!data.error) {
           setRegisterStatus("success");
           setTimeout(() => navigate("/login"), 3000);
@@ -39,7 +39,7 @@ const Register = () => {
           reset();
         }
       })
-      .catch(() => navigate("/404")); */
+      .catch(() => navigate("/404"));
   };
   return (
     <div
@@ -74,7 +74,7 @@ const Register = () => {
               fullWidth
               label="Nombre de usuario"
               variant="standard"
-              {...register("username", {
+              {...register("name", {
                 required: "El nombre de usuario es obligatorio",
               })}
               error={!!errors?.username}

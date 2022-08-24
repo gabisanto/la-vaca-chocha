@@ -2,10 +2,10 @@ import { useState } from "react";
 import useMatches from "../hooks/useMatches";
 import back from "../assets/backusers.jpg";
 import AlertMessage from "../commons/AlertMessage";
-/* import { useDispatch } from "react-redux"; */
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
-/* import { sendLoginRequest } from "../store/user"; */
+import { sendLoginRequest } from "../store/user";
 import { TextField, Container, Box, Button } from "@mui/material";
 import { AccountCircle, Visibility } from "@mui/icons-material";
 import styles from "../styles/userpages.module.css";
@@ -18,7 +18,7 @@ const Login = () => {
   const [loginStatus, setLoginStatus] = useState("");
 
   const navigate = useNavigate();
-  /*   const dispatch = useDispatch(); */
+  const dispatch = useDispatch();
   /* configuración usando react hook form */
   const {
     register,
@@ -29,7 +29,7 @@ const Login = () => {
   /* realizando el login */
   const onSubmit = (data) => {
     console.log(data);
-    /* dispatch(sendLoginRequest(data))
+    dispatch(sendLoginRequest(data))
       .then(({ payload }) => {
         if (payload) {
           setLoginStatus("success");
@@ -41,7 +41,7 @@ const Login = () => {
           reset();
         }
       })
-      .catch(() => navigate("/404")); */
+      .catch(() => navigate("/404"));
   };
   return (
     <div

@@ -16,7 +16,7 @@ Users.init(
     name: { type: Sequelize.STRING, allowNull: false },
     email: { type: Sequelize.STRING, allowNull: false },
     password: { type: Sequelize.STRING, allowNull: false },
-    avatar: { type: Sequelize.STRING, allowNull: false },
+    avatar: { type: Sequelize.STRING },
     salt: { type: Sequelize.STRING },
     isAdmin: { type: Sequelize.BOOLEAN, defaultValue: false },
   },
