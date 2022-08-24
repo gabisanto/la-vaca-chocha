@@ -5,17 +5,36 @@ const { generateToken, validateToken } = require("../config/tokens");
 const { validateAuth } = require("../middlewares/auth");
 const Users = require("../models/Users.js");
 
-router.post("/register", (req, res) => {
+router.get("/me", validateAuth, (req, res) => {
+  res.send(req.user);
+});
+
+router.get("/", (req, res, next) => {
+  Users.findAll()
+    .then((users) => {
+      return res.send(users);
+    })
+    .catch(next);
+});
+
+router.get("/:id", function (req, res, next) {
+  Users.findOne({
+    where: {
+      id: req.params.id,
+    },
+  }).then((user) => res.send(user));
+});
+
+router.post("/", (req, res) => {
   Users.create(req.body).then((user) => {
     res.status(201).send(user);
   });
 });
 
-//QUEDA PENDIENTE EL METODO VALIDATE PASSWORD DEL MODELO
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
 
-  User.findOne({ where: { email } }).then((user) => {
+  Users.findOne({ where: { email } }).then((user) => {
     if (!user) return res.sendStatus(401);
     user.validatePassword(password).then((isValid) => {
       if (!isValid) return res.sendStatus(401);
@@ -45,25 +64,12 @@ router.put("/:id", (req, res) => {
   });
 });
 
-router.get("/me", validateAuth, (req, res) => {
-    res.send(req.user);
-  });
-  
 router.delete("/admin/:id", (req, res) => {
   Users.destroy({
     where: {
-      id: 1,
+      id: req.params.id,
     },
-  });
-});
-
-router.get("/", (req, res, next) => {
-  Users.findAll()
-    .then((users) => {
-      return res.send(users);
-    })
-    .catch(next);
-
+  }).then((resp) => res.sendStatus(202));
 });
 
 module.exports = router;
