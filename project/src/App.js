@@ -3,11 +3,13 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProductsCard from "./components/ProductsCard";
 import Test from "./components/Test";
+
 import Login from "./components/Login";
 import Register from "./components/Register";
 import NotFound from "./components/NotFound";
 import CreateProduct from "./components/CreateProduct";
 import EditProduct from "./components/EditProduct";
+
 import Cart from "./components/Cart";
 import CartDemo from "./components/CartDemo";
 import Home from "./components/Home";
@@ -17,7 +19,6 @@ const App = () => {
     <div>
       {/* <Navbar /> */}
       <div>
-        {/* <ProductsCard /> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/test" element={<Test />} />
@@ -36,8 +37,14 @@ const App = () => {
           <Route path="categories/:category"> element={<Category />
           {user && <Route path="profile" element={<Profile />} />}
            */}
+          <Route path="product/:id" element={<ProductsCard/>} />
+          <Route path="product" element={<ShowProducts/>} />
+          <Route path="product/search" element={<Search/>} />
         </Routes>
       </div>
+      <div className="footer">
+  <p>La vaca chocha, realizado por alumn@s de Plataforma 5</p>
+</div>
     </div>
   );
 };

@@ -1,17 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useEffect , useState} from "react";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
+import styles from "../styles/userpages.module.css";
 import "../index.css";
 import HeartFav from "../commons/HeartFav";
+import axios from "axios";
+
 
 
 const ProductsCard = () => {
+
+  const [products, setProducts] = useState([]);
+   
+  // me trigo a producto por id
+  useEffect(() => {
+    axios
+    .get("/api/products/:id")
+    .then((res) => res.data)
+    .then((data) => {
+      setProducts(data.results);
+    });
+  }, []);
+
+
+  const addCart = (id) => {
+   console.log(id);
+  };
+
+  
    return (
-    <div>
+    <div   style={{
+      backgroundColor: "#f1e9da",
+    }}
+    className={styles.backImg}>
     <Card sx={{ display: 'flex' }}>  
     <CardMedia
         component="img"
@@ -21,11 +46,9 @@ const ProductsCard = () => {
       />  
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
-        <Typography sx={{ fontSize: 14}} color="text.secondary" gutterBottom>
-        Aceite de Oliva Extra Virgen Clásico x 500ml <HeartFav/>
-        </Typography>
+        
         <Typography variant="h5" component="div">
-         Zuccardi
+        {products.name} Zuccardi <HeartFav/>
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
            $1.446,11
@@ -41,7 +64,22 @@ const ProductsCard = () => {
         </Typography>
       </CardContent>
       <CardActions>
-      <Button sx={{ backgroundColor:"#03A696"}}variant="contained">Agregar al carrito</Button>
+      <Button 
+            variant="contained"
+            onClick={()=>{addCart()}}
+            type="submit"
+            size="medium"
+            sx={{
+              fontWeight: "bold",
+              backgroundColor: "#03A696",
+              "&:hover": {
+                backgroundColor: "#04BF9D",
+                color: "#757575",
+              },
+            }}
+          >
+            Agregar al carrito
+          </Button>
       </CardActions>
     </Card>
  
