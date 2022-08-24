@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding-bottom: 3em;
 }
 
 code {
@@ -16,15 +17,26 @@ code {
   width: 5vmin;
   height: 5vmin;
   float: right;
-  
+  filter: invert(51%) sepia(99%) saturate(680%) hue-rotate(126deg) brightness(91%) contrast(97%);
   
 }
 
 .heartFav:hover{
-  color: #F27457; 
+  filter: invert(50%) sepia(94%) saturate(934%) hue-rotate(327deg) brightness(103%) contrast(90%); 
 
 }
 
 .primary {
   color: #03A696;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color:#BF665E;;
+  color: white;
+  text-align: center;
+  font-size: x-small;
 }
