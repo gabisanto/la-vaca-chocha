@@ -9,7 +9,8 @@ import Register from "./components/Register";
 import NotFound from "./components/NotFound";
 import CreateProduct from "./components/CreateProduct";
 import EditProduct from "./components/EditProduct";
-
+import ShowProducts from "./components/ShowProducts";
+import Search from "./components/Search";
 import Cart from "./components/Cart";
 import CartDemo from "./components/CartDemo";
 import Home from "./components/Home";
@@ -37,14 +38,14 @@ const App = () => {
           <Route path="categories/:category"> element={<Category />
           {user && <Route path="profile" element={<Profile />} />}
            */}
-          <Route path="product/:id" element={<ProductsCard/>} />
-          <Route path="product" element={<ShowProducts/>} />
-          <Route path="product/search" element={<Search/>} />
+          <Route path="product/:id" element={<ProductsCard />} />
+          <Route path="product" element={<ShowProducts />} />
+          <Route path="product/search" element={<Search />} />
         </Routes>
       </div>
       <div className="footer">
-  <p>La vaca chocha, realizado por alumn@s de Plataforma 5</p>
-</div>
+        <p>La vaca chocha, realizado por alumn@s de Plataforma 5</p>
+      </div>
     </div>
   );
 };
