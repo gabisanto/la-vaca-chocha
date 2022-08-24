@@ -4,6 +4,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const app = express();
 const models = require("./models")
+const db = require("./config/db")
 
 const routes = require("./routes");
 const envs = require("./config/envs");
