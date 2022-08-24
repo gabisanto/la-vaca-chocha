@@ -21,11 +21,10 @@ Users.init(
         type: Sequelize.STRING,
         allowNull: false,
       },
-      rol: {
-        type: Sequelize.STRING,
-        defaultValue: "client"
+      isAdmin: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       }
-
     },
     { sequelize: db, modelName: "users" }
   );
