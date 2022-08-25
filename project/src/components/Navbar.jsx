@@ -5,12 +5,13 @@ import {
   IconButton,
   Typography,
   Stack,
-  Button
+  Button,
 } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import InventoryIcon from "@mui/icons-material/Inventory";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -34,9 +35,11 @@ const Navbar = () => {
             <Button color="inherit">
               <LoginIcon /> LOGIN
             </Button>
-            <Button color="inherit">
-              <InventoryIcon /> productos
-            </Button>
+            <Link to="/product" className="links">
+              <Button color="inherit">
+                <InventoryIcon /> productos
+              </Button>
+            </Link>
             <Button color="inherit">
               <ShoppingCartIcon /> carrito
             </Button>
@@ -48,7 +51,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
-// 1) npm install @mui/material @emotion/react @emotion/styled   
+// 1) npm install @mui/material @emotion/react @emotion/styled
 /*  2)"esto va en index.js arriba del title"  =====> 
  
 <link rel="stylesheet"
