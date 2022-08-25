@@ -1,33 +1,34 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding-bottom: 3em;
+  background-color: #f1e9da;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-.heartFav{
+.heartFav {
   width: 5vmin;
   height: 5vmin;
   float: right;
-  filter: invert(51%) sepia(99%) saturate(680%) hue-rotate(126deg) brightness(91%) contrast(97%);
-  
+  filter: invert(51%) sepia(99%) saturate(680%) hue-rotate(126deg)
+    brightness(91%) contrast(97%);
 }
 
-.heartFav:hover{
-  filter: invert(50%) sepia(94%) saturate(934%) hue-rotate(327deg) brightness(103%) contrast(90%); 
-
+.heartFav:hover {
+  filter: invert(50%) sepia(94%) saturate(934%) hue-rotate(327deg)
+    brightness(103%) contrast(90%);
 }
 
 .primary {
-  color: #03A696;
+  color: #03a696;
 }
 
 .footer {
@@ -35,8 +36,13 @@ code {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color:#BF665E;;
+  background-color: #bf665e;
   color: white;
   text-align: center;
   font-size: x-small;
+}
+
+.links {
+  color: white;
+  text-decoration: none;
 }

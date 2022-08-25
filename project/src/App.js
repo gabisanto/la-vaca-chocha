@@ -14,11 +14,12 @@ import Search from "./components/Search";
 import Cart from "./components/Cart";
 import CartDemo from "./components/CartDemo";
 import Home from "./components/Home";
+import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
     <div>
-      {/* <Navbar /> */}
+      <Navbar />
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -31,7 +32,7 @@ const App = () => {
           {/* ruta de admin */}
           <Route path="product/create" element={<CreateProduct />} />
           {/* ruta de admin */}
-          <Route path="edit/:productId" element={<EditProduct />} />
+          <Route path="product/edit/:id" element={<EditProduct />} />
           <Route path="*" element={<Navigate to="404" />} />
           {/* 
           <Route path="categories"> element={<Categories />}
