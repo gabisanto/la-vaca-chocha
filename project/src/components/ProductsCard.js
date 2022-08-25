@@ -5,24 +5,32 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
+import { Container } from "@mui/material";
 import styles from "../styles/userpages.module.css";
 import "../index.css";
 import HeartFav from "../commons/HeartFav";
 import axios from "axios";
+import { Link, useParams } from "react-router-dom";
+import Volver from "../commons/Volver";
+import { useSelector, useDispatch } from "react-redux";
 
 
 
 const ProductsCard = () => {
-
+  const {id}= useParams()
   const [products, setProducts] = useState([]);
+
+  const cart = useSelector((state) => state.cart);
+
+  const dispatch = useDispatch();
    
   // me trigo a producto por id
   useEffect(() => {
     axios
-    .get("/api/products/:id")
+    .get(`http://localhost:3001/api/products/${id}`)
     .then((res) => res.data)
     .then((data) => {
-      setProducts(data.results);
+      setProducts(data);
     });
   }, []);
 
@@ -33,57 +41,84 @@ const ProductsCard = () => {
 
   
    return (
-    <div   style={{
-      backgroundColor: "#f1e9da",
-    }}
+    <div   style={{backgroundColor: "#f1e9da" }}
     className={styles.backImg}>
-    <Card sx={{ display: 'flex' }}>  
-    <CardMedia
-        component="img"
-        sx={{ width: 350 }}
-        image="https://d3ugyf2ht6aenh.cloudfront.net/stores/001/434/490/products/zucc02_1-e90635fa7d1a781d0a16027132680536-1024-10241-60160a9a642d1bb10516085256452282-640-0.jpg"
-        alt="aceita La toscana"
-      />  
-    <Card sx={{ minWidth: 275 }}>
-      <CardContent>
+
+<Container
+          
         
-        <Typography variant="h5" component="div">
-        {products.name} Zuccardi <HeartFav/>
-        </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-           $1.446,11
-        </Typography>
-        <Typography variant="body2">
-        Esta selección especial, da un aroma frutado verde intenso con notas de hierba recién cortada. Aceite de gran cuerpo, con un suave amargor y picor indicativos del mayor porcentaje de antioxidantes (Polifenoles), característicos de la aceituna en envero de más alto contenido en Ácido Oleico.
-        Aceite de Oliva para experimentar con los platos de siempre.
-          <br />         
-        </Typography>
-        <br/>
-        <Typography sx={{ fontSize: 14}} color="text.secondary" gutterBottom>
-        Cantidad disponible: 10
-        </Typography>
-      </CardContent>
-      <CardActions>
-      <Button 
-            variant="contained"
-            onClick={()=>{addCart()}}
-            type="submit"
-            size="medium"
-            sx={{
-              fontWeight: "bold",
-              backgroundColor: "#03A696",
-              "&:hover": {
-                backgroundColor: "#04BF9D",
-                color: "#757575",
-              },
-            }}
-          >
-            Agregar al carrito
-          </Button>
-      </CardActions>
-    </Card>
- 
-    </Card>
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: 0,
+          }}
+        >    
+        <Card sx={{ display: 'flex' ,width: 550}} 
+              sm={{display: 'flex', width: 450 }} 
+              md={{display: 'flex', width: 250 }}>  
+        
+        <CardMedia
+        sx={{ width: 250 }}
+        sm={{ width: 250 }} 
+        md={{ width: 150 }}
+            component="img"
+            image="https://st3.depositphotos.com/1000419/12865/v/600/depositphotos_128654054-stock-illustration-funny-colorful-cows-dancing-sketch.jpg"
+            alt="aceita La toscana"
+          />  
+         
+          
+        <Card sx={{ width: 300 }}
+              sm={{ width: 200 }} 
+              md={{ width: 100 }}>
+          <CardContent>
+            
+            <Typography variant="h5" component="div">
+            {products.name}<HeartFav/>
+            </Typography>
+            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+               {products.price}
+            </Typography>
+            <Typography variant="body2">
+            {products.description}
+              <br />         
+            </Typography>
+            <br/>
+            <Typography sx={{ fontSize: 14}} color="text.secondary" gutterBottom>
+            Cantidad disponible: {products.stock}
+            </Typography>
+          </CardContent>
+          <CardActions>
+          <Link to="/product">
+          <Volver/>
+          </Link>
+          <Button 
+                variant="contained"
+                onClick={() =>
+                  dispatch({
+                    type: "ADD",
+                    payload: { ...products, quantity: 1 },
+                  })
+                }
+                type="submit"
+                size="medium"
+                sx={{
+                  fontWeight: "bold",
+                  backgroundColor: "#03A696",
+                  "&:hover": {
+                    backgroundColor: "#04BF9D",
+                    color: "#757575",
+                  },
+                }}
+              >
+                Agregar al carrito
+              </Button>
+              
+              
+          </CardActions>
+        </Card>
+        </Card> 
+        </Container>
     </div>
   );
 };

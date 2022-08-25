@@ -18,14 +18,15 @@ const Navbar = () => {
     <div>
       <AppBar position="static">
         <Toolbar>
+          <Link to="/">
           <Typography
             variant="h5"
             component="div"
             textAlign="left"
-            sx={{ flexGrow: 1 }}
-          >
+            sx={{ flexGrow: 1 }}>
             La Vaca Chocha
           </Typography>
+          </Link>
           <Stack direction="row" spacing={4}>
             <Button color="inherit">
               {" "}
@@ -40,9 +41,11 @@ const Navbar = () => {
                 <InventoryIcon /> productos
               </Button>
             </Link>
+            <Link to="/cartdemo">
             <Button color="inherit">
               <ShoppingCartIcon /> carrito
             </Button>
+            </Link>
           </Stack>
         </Toolbar>
       </AppBar>
