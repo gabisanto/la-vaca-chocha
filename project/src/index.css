@@ -47,6 +47,20 @@ code {
   text-decoration: none;
 }
 
+
+.padding {
+  padding-top: 30 px;
+  padding-left: 30px;
+}
+
+.home{
+ 
+  height: 100px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
+
 .back {
   margin-top: 64px;
 }
@@ -82,3 +96,4 @@ code {
   margin-left: -3px;
   text-decoration: none;
 }
+

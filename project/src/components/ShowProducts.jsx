@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import styles from "../styles/userpages.module.css";
+
 import { Link } from "react-router-dom";
 import {
   Typography,
@@ -10,6 +10,7 @@ import {
   Card,
   CardContent,
   CardActions,
+  CardMedia
 } from "@mui/material";
 import Cart from "../commons/Cart";
 import { useSelector, useDispatch } from "react-redux";
@@ -22,19 +23,13 @@ const ShowProducts = () => {
   /*  const { user } = useContext(AuthContext); */
   const [products, setProducts] = useState([]);
 
-  // me trigo a products
+  // me traigo a products
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/products")
       .then((res) => setProducts(res.data));
   }, []);
 
-  const addCart = (id) => {
-    console.log(id);
-    axios.post(`/api/cart`, {
-      id,
-    });
-  };
 
   return (
     <div
@@ -53,16 +48,25 @@ const ShowProducts = () => {
         }}
       >
         <p style={{ textAlign: "center" }}>
-          Productos <Link to="/cart">Go to cart</Link>
+
+          Productos
+
+          
         </p>
       </Container>
       <Container sx={{ p: 5, backgroundColor: "#e0e0e0", borderRadius: 1 }}>
         <Grid container my={4}>
           {products?.map((producto) => {
             return (
-              <Grid item xs={4} p={2}>
-                <Card>
-                  <CardContent>
+              <Grid item xs={12} sm={6} md={4} p={2} key={producto.id}>
+                <Card ><Link to={`/product/${producto.id}`} style={{ textDecoration: "none" }}>
+                <CardMedia
+                    component="img"
+                    height="70"
+                    image="https://animalgourmet.com/wp-content/uploads/2017/10/semillas.jpg"
+                    alt="imagen de producto"
+                  />
+                    <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                       {producto.name}
                     </Typography>
@@ -74,7 +78,8 @@ const ShowProducts = () => {
                       {producto.price}
                     </Typography>
                   </CardContent>
-                  <CardActions>
+                  </Link>
+                   <CardActions>
                     <Button
                       size="small"
                       onClick={() =>
@@ -86,6 +91,7 @@ const ShowProducts = () => {
                     >
                       <Cart />
                     </Button>
+                    
                   </CardActions>
                 </Card>
               </Grid>

@@ -104,6 +104,7 @@ const Navbar = () => {
   };
 
   return (
+
     <>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar
@@ -190,6 +191,7 @@ const Navbar = () => {
         <Drawer openStatus={open} user={user} stateChanger={setOpen} />
       </Box>
     </>
+
   );
 };
 
