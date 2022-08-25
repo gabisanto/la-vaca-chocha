@@ -4,6 +4,7 @@ const router = express.Router();
 const { generateToken, validateToken } = require("../config/tokens");
 const { validateAuth } = require("../middlewares/auth");
 const Users = require("../models/Users.js");
+const Cart = require("../models/Cart");
 
 router.get("/me", validateAuth, (req, res) => {
   res.send(req.user);
@@ -51,6 +52,17 @@ router.post("/login", (req, res) => {
       res.send(payload);
     });
   });
+});
+
+router.post("/logout", (req, res) => {
+  const token = req.cookies.token;
+  const { user } = validateToken(token);
+  const cart = req.body;
+
+  if (cart.length > 0) {
+    user.addCart(cart);
+  }
+  res.clearCookie("token");
 });
 
 router.put("/:id", (req, res) => {
