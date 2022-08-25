@@ -48,7 +48,10 @@ const ShowProducts = () => {
         }}
       >
         <p style={{ textAlign: "center" }}>
+
           Productos
+
+          
         </p>
       </Container>
       <Container sx={{ p: 5, backgroundColor: "#e0e0e0", borderRadius: 1 }}>

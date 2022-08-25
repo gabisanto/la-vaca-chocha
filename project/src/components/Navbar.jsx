@@ -1,65 +1,198 @@
-import React from "react";
+import { useState, React } from "react";
+import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import logo from "../assets/flaticon.png";
+import useMatches from "../hooks/useMatches";
+import axios from "axios";
+import { styled, alpha } from "@mui/material/styles";
+import Drawer from "./Drawer";
 import {
   AppBar,
+  Box,
   Toolbar,
   IconButton,
   Typography,
-  Stack,
-  Button,
+  InputBase,
 } from "@mui/material";
-import LoginIcon from "@mui/icons-material/Login";
-import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import InventoryIcon from "@mui/icons-material/Inventory";
-import { Link } from "react-router-dom";
+
+/* styles for the navbar */
+
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(3),
+    width: "auto",
+  },
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
+    },
+  },
+}));
 
 const Navbar = () => {
+  /* para saber el total de elementos del carrito */
+  const cart = useSelector((state) => state.cart);
+  const addition = (acc, currentvalue) => {
+    return acc + currentvalue.quantity;
+  };
+  const total = cart.reduce(addition, 0);
+  console.log(total, "esto es el total");
+
+  /* media queries */
+  const matches = useMatches();
+
+  /* funcionalidades del drawer izquierdo */
+
+  const [open, setOpen] = useState(false);
+
+  const handleDrawer = () => {
+    setOpen(!open);
+  };
+
+  /* funcionalidad del search */
+
+  const user = useSelector((state) => state.user);
+  const { register, handleSubmit, reset } = useForm();
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
+    try {
+      console.log(data);
+      /* const resp = await axios.get(
+        `http://localhost:5000/api/media/search/${data.searchInput}`
+      );
+
+      const results = await resp.data;
+      navigate("/results", { state: { results } });
+      reset(); */
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
-    <div>
-      <AppBar position="static">
-        <Toolbar>
-          <Link to="/">
-          <Typography
-            variant="h5"
-            component="div"
-            textAlign="left"
-            sx={{ flexGrow: 1 }}>
-            La Vaca Chocha
-          </Typography>
-          </Link>
-          <Stack direction="row" spacing={4}>
-            <Button color="inherit">
-              {" "}
-              <AssignmentIndIcon />
-              registrarse{" "}
-            </Button>
-            <Button color="inherit">
-              <LoginIcon /> LOGIN
-            </Button>
-            <Link to="/product" className="links">
-              <Button color="inherit">
-                <InventoryIcon /> productos
-              </Button>
+
+    <>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar
+          position="fixed"
+          sx={{ backgroundColor: "#bf665e" }}
+          elevation={0}
+        >
+          <Toolbar>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              sx={{ mr: 2 }}
+              onClick={handleDrawer}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <Box
+                  component="img"
+                  sx={{
+                    height: matches ? 60 : 50,
+                    pr: matches ? null : 2,
+                  }}
+                  alt="Your logo."
+                  src={logo}
+                />
+                <Typography
+                  variant="h6"
+                  noWrap
+                  component="div"
+                  sx={{ display: { xs: "none", sm: "block" } }}
+                >
+                  la vaca chocha
+                </Typography>
+              </div>
             </Link>
-            <Link to="/cartdemo">
-            <Button color="inherit">
-              <ShoppingCartIcon /> carrito
-            </Button>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+
+                <StyledInputBase
+                  label="searchInput"
+                  name="searchInput"
+                  placeholder="Buscar…"
+                  inputProps={{ "aria-label": "search" }}
+                  {...register("searchInput")}
+                />
+              </Search>
+            </form>
+            <Box sx={{ flexGrow: 1 }} />
+            <Link to="/cart">
+              <Box sx={{ display: "flex", color: "white" }}>
+                <IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="cart"
+                  aria-haspopup="true"
+                  color="inherit"
+                >
+                  <ShoppingCartIcon />
+                </IconButton>
+              </Box>
             </Link>
-          </Stack>
-        </Toolbar>
-      </AppBar>
-    </div>
+            <span
+              class="badge badge-warning"
+              id="lblCartCount"
+              style={{ textDecoration: "none" }}
+            >
+              {total}
+            </span>
+          </Toolbar>
+        </AppBar>
+        <Drawer openStatus={open} user={user} stateChanger={setOpen} />
+      </Box>
+    </>
+
   );
 };
 
 export default Navbar;
-// 1) npm install @mui/material @emotion/react @emotion/styled
-/*  2)"esto va en index.js arriba del title"  =====> 
- 
-<link rel="stylesheet"
- href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-/>  
-
-3) instalar iconos ====> npm install @mui/icons-material
-*/

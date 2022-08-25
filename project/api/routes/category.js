@@ -1,15 +1,42 @@
 const express = require("express");
+const { Products } = require("../models");
 const router = express.Router();
-const Categories = require("../models/Categories.js");
+const Categories = require("../models/Categories")
 
-router.get("/", function (req, res, next) {
-  Categories.findAll()
-    .then((categories) => res.send(categories))
-    .catch(next);
+
+//RUTA QUE DEVUELVA LOS PRODUCTOS DE DETERMINADA CATEGORIA
+
+router.get('/:name', function(req, res, next) {
+    Categories.findOne({
+        where: {
+            name : req.params.name 
+        },
+        include : {model : Products} 
+    })
+    .then((products)=>res.send(products))
+    .catch(next)
+}); 
+
+
+
+//RUTA QUE DEVUELVE TODAS LAS CATEGORIAS
+
+router.get('/', function(req, res, next) {
+    Categories.findAll()
+    .then((products)=>res.send(products))
+    .catch(next)
+}); 
+
+
+
+//RUTA QUE DEVUELVA LOS PRODUCTOS CUYO NOMBRE, COINCIDA CON LA BUSQUEDA DEL USUARIO A TRAVES DE INPUT
+
+router.get('/name',function(req,res,next){
+
 });
 
-router.post("/", function (req, res, next) {
-  Categories.create(req.body).then((category) => res.send(category));
-});
+
+
 
 module.exports = router;
+
