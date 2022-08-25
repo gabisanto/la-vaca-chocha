@@ -13,10 +13,13 @@ import ShowProducts from "./components/ShowProducts";
 import Search from "./components/Search";
 import Cart from "./components/Cart";
 import CartDemo from "./components/CartDemo";
+import Payment from "./components/Payment";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 
 const App = () => {
+  const cart = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.user);
   return (
     <div>
       <Navbar />
@@ -26,8 +29,9 @@ const App = () => {
           <Route path="/test" element={<Test />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="cart" element={<Cart />} />
-          <Route path="cartdemo" element={<CartDemo />} />
+          {/* <Route path="cart" element={<Cart />} /> */}
+          <Route path="cart" element={<CartDemo />} />
+          {cart.length > 0 && <Route path="payment" element={<Payment />} />}
           <Route path="404" element={<NotFound />} />
           {/* ruta de admin */}
           <Route path="product/create" element={<CreateProduct />} />

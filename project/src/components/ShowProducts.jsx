@@ -53,7 +53,7 @@ const ShowProducts = () => {
         }}
       >
         <p style={{ textAlign: "center" }}>
-          Productos <Link to="/cartdemo">Go to cart</Link>
+          Productos <Link to="/cart">Go to cart</Link>
         </p>
       </Container>
       <Container sx={{ p: 5, backgroundColor: "#e0e0e0", borderRadius: 1 }}>

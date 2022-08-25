@@ -46,3 +46,39 @@ code {
   color: white;
   text-decoration: none;
 }
+
+.back {
+  margin-top: 64px;
+}
+
+@media (max-width: 600px) {
+  .back {
+    padding: 50px;
+    margin-top: 56px;
+  }
+}
+
+/* para la burbuja de cantidad de carrito */
+
+.badge {
+  padding-left: 9px;
+  padding-right: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+  background-color: #c67605;
+}
+#lblCartCount {
+  font-size: 12px;
+  background: #253659;
+  color: #fff;
+  font-weight: bold;
+  padding: 0 5px;
+  vertical-align: top;
+  margin-left: -3px;
+  text-decoration: none;
+}

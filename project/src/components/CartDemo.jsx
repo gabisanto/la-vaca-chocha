@@ -1,5 +1,6 @@
 import * as React from "react";
 import useMatches from "../hooks/useMatches";
+import { Link } from "react-router-dom";
 import { Container } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -22,7 +23,7 @@ function subtotal(items) {
   return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
 }
 
-export default function SpanningTable() {
+export default function Cart() {
   /* media queries */
   const matches = useMatches();
   const cart = useSelector((state) => state.cart);
@@ -38,6 +39,7 @@ export default function SpanningTable() {
         backgroundColor: "#f1e9da",
         padding: 10,
       }}
+      className="back"
     >
       <Container
         maxWidth={matches ? "xs" : "m"}
@@ -126,12 +128,13 @@ export default function SpanningTable() {
                     </IconButton>
                   </div>
                   <p>$ {priceRow(product.price, product.quantity)}</p>
-                  <IconButton aria-label="delete">
-                    <DeleteIcon
-                      onClick={() =>
-                        dispatch({ type: "REMOVE", payload: product })
-                      }
-                    />
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() =>
+                      dispatch({ type: "REMOVE", payload: product })
+                    }
+                  >
+                    <DeleteIcon />
                   </IconButton>
                 </CardActions>
               </Card>
@@ -149,7 +152,9 @@ export default function SpanningTable() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small">Confirmar pedido</Button>
+              <Link to="/payment">
+                <Button size="small">Confirmar pedido</Button>
+              </Link>
             </CardActions>
           </Card>
         </Container>
