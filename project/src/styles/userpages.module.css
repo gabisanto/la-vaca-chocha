@@ -1,3 +1,5 @@
+/* login y register */
+
 .backImg {
   background-size: cover;
   background-repeat: no-repeat;
@@ -15,4 +17,16 @@
     padding: 50px;
     top: 56px;
   }
+}
+
+/* para los links */
+
+.linkMenu {
+  text-decoration: none;
+  color: black;
+}
+
+.linkMenu:hover {
+  text-decoration: none;
+  color: black;
 }
