@@ -10,19 +10,19 @@ Cart.init(
       allowNull: true,
     },
     amount: {
-      type: DataTypes.INTEGER,
+      type: Sequelize.INTEGER,
       allowNull: false,
     },
     price: {
-      type: DataTypes.INTEGER,
+      type: Sequelize.INTEGER,
       allowNull: false,
     },
     totalPrice: {
-      type: DataTypes.INTEGER,
+      type: Sequelize.INTEGER,
       allowNull: false,
     },
     stock: {
-      type: DataTypes.BOOLEAN,
+      type: Sequelize.BOOLEAN,
       allowNull: false,
     },
   },
