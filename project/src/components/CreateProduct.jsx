@@ -9,9 +9,6 @@ import { TextField, Container, Box, Button } from "@mui/material";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 
 const CreateProduct = () => {
-  /* comienzo useNavigate */
-  const navigate = useNavigate();
-
   /* media queries */
   const matches = useMatches();
 
@@ -25,20 +22,22 @@ const CreateProduct = () => {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    /* axios
-      .post(" api endpoint ", data) */
-    /* manejo errores */
-    /* .then(({ data }) => {
-        if (!data.error) {
+    axios
+      .post("http://localhost:3001/api/products", data)
+      /* manejo errores */
+      .then(({ data }) => {
+        if (data.name) {
+          console.log(data, "esto es data");
           setCreateStatus("success");
-          setTimeout(() => navigate("/"), 3000);
-        } else {
-          setRegisterStatus("error");
           setTimeout(() => setCreateStatus(""), 3000);
           reset();
         }
       })
-      .catch(() => navigate("/404")); */
+      .catch(() => {
+        setCreateStatus("error");
+        setTimeout(() => setCreateStatus(""), 3000);
+        reset();
+      });
   };
   return (
     <div
