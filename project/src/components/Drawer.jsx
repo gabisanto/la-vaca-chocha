@@ -21,21 +21,6 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { makeStyles } from "@mui/styles";
-import { useTheme } from "@mui/material/styles";
-
-/* styles for the drawer */
-
-const useStyles = makeStyles(() => {
-  return {
-    drawerPaper: {
-      width: 240,
-      backgroundColor: "#bf665e",
-      paddingTop: 90,
-      color: "white",
-    },
-  };
-});
 
 export default function TemporaryDrawer({ openStatus, stateChanger, user }) {
   /* traigo estado global cart */
@@ -44,8 +29,7 @@ export default function TemporaryDrawer({ openStatus, stateChanger, user }) {
 
   /* configuration to make the drawer work */
   const navigate = useNavigate();
-  const theme = useTheme();
-  const classes = useStyles(theme);
+
   const [openDrawer, setOpenDrawer] = useState({
     left: false,
   });
@@ -191,12 +175,10 @@ export default function TemporaryDrawer({ openStatus, stateChanger, user }) {
         anchor={"left"}
         open={openDrawer["left"]}
         onClose={toggleDrawer("left", false)}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
         PaperProps={{
           sx: {
             backgroundColor: "#e0e0e0",
+            pt: 10,
           },
         }}
       >
