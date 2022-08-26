@@ -178,7 +178,7 @@ const Navbar = () => {
               </Box>
             </Link>
             <span
-              class="badge badge-warning"
+              className="badge badge-warning"
               id="lblCartCount"
               style={{ textDecoration: "none" }}
             >

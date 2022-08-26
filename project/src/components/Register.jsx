@@ -25,7 +25,6 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
     axios
       .post("http://localhost:3001/api/users", data)
       /* manejo errores */

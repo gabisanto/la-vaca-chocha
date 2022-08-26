@@ -10,7 +10,7 @@ import {
   Card,
   CardContent,
   CardActions,
-  CardMedia
+  CardMedia,
 } from "@mui/material";
 import Cart from "../commons/Cart";
 import { useSelector, useDispatch } from "react-redux";
@@ -30,12 +30,13 @@ const ShowProducts = () => {
       .then((res) => setProducts(res.data));
   }, []);
 
-
   return (
     <div
       style={{
         backgroundColor: "#f1e9da",
+        padding: 10,
       }}
+      className="back"
     >
       <Container
         sx={{
@@ -47,39 +48,38 @@ const ShowProducts = () => {
           fontWeight: "bold",
         }}
       >
-        <p style={{ textAlign: "center" }}>
-
-          Productos
-
-          
-        </p>
+        <p style={{ textAlign: "center" }}>Productos</p>
       </Container>
       <Container sx={{ p: 5, backgroundColor: "#e0e0e0", borderRadius: 1 }}>
         <Grid container my={4}>
           {products?.map((producto) => {
             return (
               <Grid item xs={12} sm={6} md={4} p={2} key={producto.id}>
-                <Card ><Link to={`/product/${producto.id}`} style={{ textDecoration: "none" }}>
-                <CardMedia
-                    component="img"
-                    height="70"
-                    image="https://animalgourmet.com/wp-content/uploads/2017/10/semillas.jpg"
-                    alt="imagen de producto"
-                  />
+                <Card>
+                  <Link
+                    to={`/product/${producto.id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <CardMedia
+                      component="img"
+                      height="70"
+                      image="https://animalgourmet.com/wp-content/uploads/2017/10/semillas.jpg"
+                      alt="imagen de producto"
+                    />
                     <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      {producto.name}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {producto.description}
-                    </Typography>
-                    <br />
-                    <Typography variant="h6" color="text.secondary">
-                      {producto.price}
-                    </Typography>
-                  </CardContent>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {producto.name}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {producto.description}
+                      </Typography>
+                      <br />
+                      <Typography variant="h6" color="text.secondary">
+                        {producto.price}
+                      </Typography>
+                    </CardContent>
                   </Link>
-                   <CardActions>
+                  <CardActions>
                     <Button
                       size="small"
                       onClick={() =>
@@ -91,7 +91,6 @@ const ShowProducts = () => {
                     >
                       <Cart />
                     </Button>
-                    
                   </CardActions>
                 </Card>
               </Grid>
