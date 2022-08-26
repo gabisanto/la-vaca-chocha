@@ -6,13 +6,13 @@ const app = express();
 const models = require("./models");
 const db = require("./config/db");
 
-const routes = require("./routes");
-const envs = require("./config/envs");
-
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
 app.use(morgan("tiny"));
+
+const routes = require("./routes");
+const envs = require("./config/envs");
 
 app.use("/api", routes);
 

@@ -69,7 +69,6 @@ const Navbar = () => {
     return acc + currentvalue.quantity;
   };
   const total = cart.reduce(addition, 0);
-  console.log(total, "esto es el total");
 
   /* media queries */
   const matches = useMatches();
@@ -104,7 +103,6 @@ const Navbar = () => {
   };
 
   return (
-
     <>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar
@@ -191,7 +189,6 @@ const Navbar = () => {
         <Drawer openStatus={open} user={user} stateChanger={setOpen} />
       </Box>
     </>
-
   );
 };
 

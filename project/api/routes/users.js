@@ -27,8 +27,18 @@ router.get("/:id", function (req, res, next) {
 });
 
 router.post("/", (req, res) => {
-  Users.create(req.body).then((user) => {
-    res.status(201).send(user);
+  Users.findOne({
+    where: { email: req.body.email },
+  }).then((userFound) => {
+    userFound
+      ? res.send({ error: "User already exists" })
+      : Users.create(req.body)
+          .then((user) => {
+            res.status(201).send(user);
+          })
+          .catch((error) => {
+            res.status(400).send(error);
+          });
   });
 });
 
@@ -55,14 +65,17 @@ router.post("/login", (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
-  const token = req.cookies.token;
+  const { token } = req.cookies;
+  console.log(token, "este es el token");
   const { user } = validateToken(token);
+  console.log(user, "este es el user");
   const cart = req.body;
+  console.log(cart, "este es el cart");
 
   if (cart.length > 0) {
     user.addCart(cart);
   }
-  res.clearCookie("token");
+  res.clearCookie("connect.sid", { path: "/" }).status(200).send("done");
 });
 
 router.put("/:id", (req, res) => {
