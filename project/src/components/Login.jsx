@@ -33,7 +33,6 @@ const Login = () => {
       .then(({ payload }) => {
         if (payload) {
           setLoginStatus("success");
-          localStorage.setItem("user", JSON.stringify(payload));
           setTimeout(() => navigate("/"), 3000);
         } else {
           setLoginStatus("error");

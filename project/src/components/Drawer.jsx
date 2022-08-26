@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import styles from "../styles/userpages.module.css";
+import { sendLogoutRequest } from "../store/user";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -37,8 +38,11 @@ const useStyles = makeStyles(() => {
 });
 
 export default function TemporaryDrawer({ openStatus, stateChanger, user }) {
-  /* configuration to make the drawer work */
+  /* traigo estado global cart */
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+
+  /* configuration to make the drawer work */
   const navigate = useNavigate();
   const theme = useTheme();
   const classes = useStyles(theme);
@@ -62,15 +66,15 @@ export default function TemporaryDrawer({ openStatus, stateChanger, user }) {
     stateChanger(open);
   };
 
-  /* handling logout since it's one of the options of the drawer */
+  /* acciones de logout */
   const handleLogout = function () {
     navigate("/");
 
-    /* dispatch(sendLogoutRequest())
+    dispatch(sendLogoutRequest(cart))
       .then(() => {
         window.localStorage.clear();
       })
-      .catch((err) => console.log("Ocurrió un error", err)); */
+      .catch((err) => console.log("Ocurrió un error", err));
   };
 
   /* drawer options */

@@ -7,18 +7,15 @@ export const sendLoginRequest = createAsyncThunk("LOGIN", (data) => {
     .then((res) => res.data);
 });
 
-/* export const sendLogoutRequest = createAsyncThunk("LOGOUT", () => {
+export const sendLogoutRequest = createAsyncThunk("LOGOUT", (cart) => {
   return axios
-    .post("http://localhost:5000/api/user/logout")
-    .then((err) => {
-      console.log(err);
-    })
+    .post("http://localhost:3001/api/users/logout", cart)
     .catch((err) => console.log("Something happened", err));
-}); */
+});
 
 const userReducer = createReducer([], {
   [sendLoginRequest.fulfilled]: (state, action) => action.payload,
-  /* [sendLogoutRequest.fulfilled]: (state, action) => (state = {}), */
+  [sendLogoutRequest.fulfilled]: (state, action) => (state = {}),
 });
 
 export default userReducer;
