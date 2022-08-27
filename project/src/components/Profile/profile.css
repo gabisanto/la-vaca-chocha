@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ffffff;
+  text-align: center;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 500;
+  color: #33363b;
+}
+
+.user_details p {
+  font-size: 14px;
+  color: #868d9b;
+}
+
+.cardProfile {
+  width: 100%;
+  height: fit-content;
+  background-color: #ffffff;
+  margin: 0 auto;
+
+  position: absolute;
+  top: 64px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+.card_profile_img {
+  width: 120px;
+  height: 120px;
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 120px;
+  margin: 0 auto;
+  margin-top: -60px;
+}
+
+.card_background_img {
+  width: 100%;
+  height: 180px;
+  background-color: #e1e7ed;
+  background: url("https://s3.amazonaws.com/arc-wordpress-client-uploads/infobae-wp/wp-content/uploads/2017/11/06113539/GettyImages-477756915.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.user_details p {
+  margin-bottom: 20px;
+}
+
+.user_details h3 {
+  margin-top: 10px;
+}
+
+.card_count {
+  padding: 30px;
+  border-top: 1px solid #dde1e7;
+}
+
+.count {
+  display: flex;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: row;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .count {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.user-actions {
+  width: 50%;
+  padding: 5px;
+}
+
+@media (max-width: 600px) {
+  .user-actions {
+    width: 80%;
+    margin-bottom: 20px;
+  }
+}
+
+.user-actions h3 {
+  padding: 10px;
+}
+
+.user-profile h3 {
+  padding: 10px;
+}
+
+.product-actions {
+  width: 50%;
+  padding: 5px;
+}
+
+@media (max-width: 600px) {
+  .product-actions {
+    width: 80%;
+  }
+}
+
+.product-actions h3 {
+  padding: 10px;
+}

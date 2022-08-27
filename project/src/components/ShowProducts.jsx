@@ -17,18 +17,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 const ShowProducts = () => {
   const cart = useSelector((state) => state.cart);
-
+  const products = useSelector((state) => state.products);
   const dispatch = useDispatch();
-
-  /*  const { user } = useContext(AuthContext); */
-  const [products, setProducts] = useState([]);
-
-  // me traigo a products
-  useEffect(() => {
-    axios
-      .get("http://localhost:3001/api/products")
-      .then((res) => setProducts(res.data));
-  }, []);
 
   return (
     <div
