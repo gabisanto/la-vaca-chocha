@@ -16,16 +16,23 @@ import {
   HowToReg,
   Home,
   Icecream,
+  ListAlt,
 } from "@mui/icons-material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export default function TemporaryDrawer({ openStatus, stateChanger, user }) {
-  /* traigo estado global cart */
+  /* traigo estado global cart y categories*/
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const categories = useSelector((state) => state.categories);
 
   /* configuration to make the drawer work */
   const navigate = useNavigate();
@@ -79,13 +86,51 @@ export default function TemporaryDrawer({ openStatus, stateChanger, user }) {
       {!user.email ? (
         <List>
           <Link to="/" style={{ textDecoration: "none" }}>
-            <ListItem sx={{ paddingLeft: 5, "&:hover": { cursor: "pointer" } }}>
+            <ListItem
+              sx={{
+                paddingLeft: 5,
+                "&:hover": { cursor: "pointer" },
+              }}
+            >
               <ListItemIcon sx={{ color: "black" }}>
                 <Home />
               </ListItemIcon>
               <ListItemText primary={"Home"} sx={{ color: "black" }} />
             </ListItem>
           </Link>
+          <ListItem sx={{ paddingLeft: 5, "&:hover": { cursor: "pointer" } }}>
+            <ListItemIcon sx={{ color: "black" }}>
+              <ListAlt />
+            </ListItemIcon>
+            <Accordion
+              disableGutters
+              elevation={0}
+              sx={{
+                backgroundColor: "#e0e0e0",
+                "&:before": {
+                  backgroundColor: "transparent !important",
+                },
+              }}
+            >
+              <AccordionSummary
+                sx={{ backgroundColor: "#e0e0e0", border: "none", p: 0 }}
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography sx={{ backgroundColor: "#e0e0e0", border: "none" }}>
+                  Categorías
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                {categories.map((cat) => (
+                  <Link to={`/categories/${cat.name}`} className="linksBlack">
+                    <Typography>{cat.name}</Typography>
+                  </Link>
+                ))}
+              </AccordionDetails>
+            </Accordion>
+          </ListItem>
           <Link to="/product" style={{ textDecoration: "none" }}>
             <ListItem sx={{ paddingLeft: 5, "&:hover": { cursor: "pointer" } }}>
               <ListItemIcon sx={{ color: "black" }}>
@@ -124,6 +169,39 @@ export default function TemporaryDrawer({ openStatus, stateChanger, user }) {
               />
             </ListItem>
           </Link>
+          <ListItem sx={{ paddingLeft: 5, "&:hover": { cursor: "pointer" } }}>
+            <ListItemIcon sx={{ color: "black" }}>
+              <ListAlt />
+            </ListItemIcon>
+            <Accordion
+              disableGutters
+              elevation={0}
+              sx={{
+                backgroundColor: "#e0e0e0",
+                "&:before": {
+                  backgroundColor: "transparent !important",
+                },
+              }}
+            >
+              <AccordionSummary
+                sx={{ backgroundColor: "#e0e0e0", border: "none", p: 0 }}
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography sx={{ backgroundColor: "#e0e0e0", border: "none" }}>
+                  Categorías
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                {categories.map((cat) => (
+                  <Link to={`/categories/${cat.name}`} className="linksBlack">
+                    <Typography>{cat.name}</Typography>
+                  </Link>
+                ))}
+              </AccordionDetails>
+            </Accordion>
+          </ListItem>
           <Link to="/product" style={{ textDecoration: "none" }}>
             <ListItem sx={{ paddingLeft: 5, "&:hover": { cursor: "pointer" } }}>
               <ListItemIcon sx={{ color: "black" }}>

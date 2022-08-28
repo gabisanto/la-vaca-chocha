@@ -1,4 +1,5 @@
 import * as React from "react";
+import Banner from "../commons/Banner/Banner";
 import useMatches from "../hooks/useMatches";
 import { Link } from "react-router-dom";
 import { Container } from "@mui/material";
@@ -34,39 +35,42 @@ export default function Cart() {
   const invoiceSubtotal = cart.reduce(addition, 0);
 
   return (
-    <div
-      style={{
-        backgroundColor: "#f1e9da",
-        padding: 10,
-      }}
-      className="back"
-    >
-      <Container
-        maxWidth={matches ? "xs" : "m"}
-        sx={{
-          p: 1,
-          mb: 1,
-          backgroundColor: "#e0e0e0",
-          borderRadius: 1,
-          color: "action.active",
-          fontWeight: "bold",
-        }}
-      >
-        <p style={{ textAlign: "center" }}>Carrito de compras</p>
-      </Container>
+    <div style={{ backgroundColor: "#e0e0e0", paddingBottom: 35 }}>
+      <Banner
+        text={"Carrito de compras"}
+        image={
+          "https://cocinemosjuntos.com.co/media/mageplaza/blog/post/c/o/condimentos-y-especias_1_.jpg"
+        }
+      />
       {cart.length === 0 ? (
         <Container
           maxWidth={matches ? "xs" : "m"}
+          disableGutters
           sx={{
-            p: 1,
-            mb: 1,
-            backgroundColor: "#e0e0e0",
-            borderRadius: 1,
-            color: "action.active",
-            fontWeight: "bold",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            pt: 3,
+            pl: matches ? null : 3,
+            pr: matches ? null : 3,
           }}
         >
-          <p style={{ textAlign: "center" }}>No hay productos en el carrito</p>
+          <Card sx={{ mb: 3, width: "100%" }}>
+            <CardContent>
+              <Typography
+                sx={{ fontSize: 20 }}
+                color="text.primary"
+                gutterBottom
+              >
+                No hay productos en el carrito
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Link to="/product">
+                <Button size="small">Ver productos</Button>
+              </Link>
+            </CardActions>
+          </Card>
         </Container>
       ) : (
         <Container
@@ -76,7 +80,9 @@ export default function Cart() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            padding: 0,
+            pt: 3,
+            pl: matches ? null : 3,
+            pr: matches ? null : 3,
           }}
         >
           {cart.map((product) => {

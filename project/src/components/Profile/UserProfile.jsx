@@ -16,13 +16,15 @@ const UserProfile = ({ user }) => {
         }}
       ></div>
       <div class="user_details">
-        <h3>{user.name}</h3>
-        <p>Rol: {user.isAdmin ? "Administrador" : "Usuario"}</p>
+        <div className="profileh3">{user.name}</div>
+        <p className="role">
+          Rol: {user.isAdmin ? "Administrador" : "Usuario"}
+        </p>
       </div>
       <div class="card_count">
         <div class="count">
           <div class="user-profile">
-            <h3>Mi historial</h3>
+            <div className="profileh3">Mi historial</div>
             <Button
               type="submit"
               variant="contained"
@@ -31,6 +33,7 @@ const UserProfile = ({ user }) => {
               sx={{
                 fontWeight: "bold",
                 marginBottom: 1,
+                marginTop: 2,
                 backgroundColor: "#03A696",
                 "&:hover": {
                   backgroundColor: "#04BF9D",

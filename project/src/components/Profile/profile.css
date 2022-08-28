@@ -6,13 +6,17 @@
 
 body {
   background-color: #ffffff;
-  text-align: center;
 }
 
-h3 {
+.profileh3 {
   font-size: 18px;
   font-weight: 500;
   color: #33363b;
+  text-align: center;
+}
+
+.role {
+  text-align: center;
 }
 
 .user_details p {
@@ -31,6 +35,12 @@ h3 {
   bottom: 0px;
   left: 0px;
   right: 0px;
+}
+
+@media (max-width: 600px) {
+  .cardProfile {
+    top: 56px;
+  }
 }
 
 .card_profile_img {

@@ -61,7 +61,7 @@ const Payment = () => {
         backgroundColor: "#f1e9da",
         padding: 10,
       }}
-      className="back"
+      className="backPay"
     >
       <Container
         maxWidth={matches ? "xs" : "m"}
@@ -83,7 +83,7 @@ const Payment = () => {
           sx={{ p: 5, backgroundColor: "#e0e0e0", borderRadius: 1 }}
         >
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Box sx={{ display: "flex", alignItems: "flex-end" }} mb={2}>
+            <Box sx={{ display: "flex", alignItems: "flex-end" }}>
               <CreditCard sx={{ color: "action.active", mr: 1, my: 0.5 }} />
               <TextField
                 id="input-with-sx"

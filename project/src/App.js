@@ -16,6 +16,7 @@ import Profile from "./components/Profile/Index.jsx";
 import CartDemo from "./components/CartDemo";
 import Payment from "./components/Payment";
 import Home from "./components/Home";
+import Users from "./components/Users";
 import Navbar from "./components/Navbar";
 
 const App = () => {
@@ -34,20 +35,12 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+          {!user.email && <Route path="register" element={<Register />} />}
           {user.email && <Route path="profile" element={<Profile />} />}
           <Route path="cart" element={<CartDemo />} />
           {cart.length > 0 && <Route path="payment" element={<Payment />} />}
           <Route path="404" element={<NotFound />} />
-          {/* ruta de admin */}
-          {user.isAdmin && (
-            <Route path="product/create" element={<CreateProduct />} />
-          )}
-          {/* ruta de admin */}
-          {user.isAdmin && (
-            <Route path="product/edit/:id" element={<EditProduct />} />
-          )}
-          <Route path="*" element={<Navigate to="404" />} />
+
           {/* 
           <Route path="categories"> element={<Categories />}
           <Route path="categories/:category"> element={<Category />
@@ -56,6 +49,15 @@ const App = () => {
           <Route path="product/:id" element={<ProductsCard />} />
           <Route path="product" element={<ShowProducts />} />
           <Route path="product/search" element={<Search />} />
+          {/* rutas de admin */}
+          {user.isAdmin && (
+            <Route path="product/create" element={<CreateProduct />} />
+          )}
+          {user.isAdmin && (
+            <Route path="product/edit/:id" element={<EditProduct />} />
+          )}
+          {user.isAdmin && <Route path="users" element={<Users />} />}
+          <Route path="*" element={<Navigate to="404" />} />
         </Routes>
       </div>
       <div className="footer">
