@@ -12,8 +12,13 @@ import styles from "../styles/userpages.module.css";
 import { TextField, Container, Box, Button } from "@mui/material";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import CircularProgress from "@mui/material/CircularProgress";
+import Checkbox from "@mui/material/Checkbox";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 const EditProduct = () => {
+  /* para el checkbox */
+  const label = { inputProps: { "aria-label": "Checkbox productos" } };
   /* traigo las categorías */
   const categories = useSelector((state) => state.categories);
   /* starting navigate */
@@ -132,30 +137,54 @@ const EditProduct = () => {
               helperText={errors?.price ? errors.price.message : null}
             />
           </Box>
-          <Box sx={{ display: "flex", alignItems: "flex-end" }} mb={2}>
-            <BorderColorIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
-            <TextField
-              id="category-id"
-              select
-              label="Categoría"
-              defaultValue={product?.categoryId}
-              fullWidth
-              SelectProps={{
-                native: true,
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "flex-start",
+              flexDirection: "column",
+            }}
+            mb={2}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
               }}
-              variant="standard"
-              {...register("categoryId", {
-                required: "La categoría es obligatoria",
-              })}
-              error={!!errors?.categoryId}
-              helperText={errors?.categoryId ? errors.categoryId.message : null}
             >
+              <BorderColorIcon
+                sx={{ color: "action.active", mr: 1, my: 0.5 }}
+              />
+              <div>
+                Categorías
+                <div style={{ width: "100%", color: "red", fontSize: 12 }}>
+                  {errors.categoryId && (
+                    <span>{errors.categoryId.message}</span>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div style={{ display: "flex", flexWrap: "wrap" }}>
               {categories.map((option) => (
-                <option key={option.id} value={option.id}>
+                <div key={option.id}>
+                  <Checkbox
+                    {...label}
+                    icon={<CheckCircleOutlineIcon sx={{ color: "#253659" }} />}
+                    name={option.name}
+                    checkedIcon={<CheckCircleIcon sx={{ color: "#253659" }} />}
+                    value={option.id}
+                    {...register("categoryId", {
+                      required: {
+                        value: true,
+                        message: "Categoría es obligatoria",
+                      },
+                    })}
+                  />
                   {option.name}
-                </option>
+                </div>
               ))}
-            </TextField>
+            </div>
+            {/* </TextField> */}
           </Box>
 
           <Box sx={{ display: "flex", alignItems: "flex-end" }} mb={2}>

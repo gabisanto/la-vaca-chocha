@@ -23,6 +23,9 @@ Products.init(
     stock: {
       type: Sequelize.INTEGER,
     },
+    categoryId: {
+      type: Sequelize.ARRAY(Sequelize.INTEGER),
+    },
   },
   { sequelize: db, modelName: "products" }
 );

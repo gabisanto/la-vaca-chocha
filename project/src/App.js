@@ -4,6 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getCategories } from "./store/categories";
 import { getProducts } from "./store/products";
+import Categories from "./components/Category/Categories";
 import ProductsCard from "./components/ProductsCard";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -40,9 +41,9 @@ const App = () => {
           <Route path="cart" element={<CartDemo />} />
           {cart.length > 0 && <Route path="payment" element={<Payment />} />}
           <Route path="404" element={<NotFound />} />
-
+          <Route path="categories" element={<Categories />} />
           {/* 
-          <Route path="categories"> element={<Categories />}
+          
           <Route path="categories/:category"> element={<Category />
           
            */}

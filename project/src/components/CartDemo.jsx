@@ -35,7 +35,9 @@ export default function Cart() {
   const invoiceSubtotal = cart.reduce(addition, 0);
 
   return (
-    <div style={{ backgroundColor: "#e0e0e0", paddingBottom: 35 }}>
+    <div
+      style={{ backgroundColor: "#e0e0e0", paddingBottom: 35, height: "100vh" }}
+    >
       <Banner
         text={"Carrito de compras"}
         image={

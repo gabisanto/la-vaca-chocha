@@ -124,7 +124,11 @@ export default function TemporaryDrawer({ openStatus, stateChanger, user }) {
               </AccordionSummary>
               <AccordionDetails>
                 {categories.map((cat) => (
-                  <Link to={`/categories/${cat.name}`} className="linksBlack">
+                  <Link
+                    to={`/categories/${cat.name}`}
+                    key={cat.id}
+                    className="linksBlack"
+                  >
                     <Typography>{cat.name}</Typography>
                   </Link>
                 ))}
@@ -195,7 +199,11 @@ export default function TemporaryDrawer({ openStatus, stateChanger, user }) {
               </AccordionSummary>
               <AccordionDetails>
                 {categories.map((cat) => (
-                  <Link to={`/categories/${cat.name}`} className="linksBlack">
+                  <Link
+                    to={`/categories/${cat.name}`}
+                    key={cat.id}
+                    className="linksBlack"
+                  >
                     <Typography>{cat.name}</Typography>
                   </Link>
                 ))}
