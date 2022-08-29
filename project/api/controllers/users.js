@@ -55,8 +55,7 @@ const login = async (req, res) => {
       if (!isValid) return res.sendStatus(401);
 
       const payload = {
-        email: user.email,
-        name: user.name,
+        isAdmin: user.email,
       };
       const token = generateToken(payload);
       res.send({ payload, token });
