@@ -1,5 +1,5 @@
 const Users = require("../models/Users.js");
-const { generateToken } = require("../config/tokens");
+const { generateToken, validateToken } = require("../config/tokens");
 
 const getProfile = async (req, res) => {
   try {
