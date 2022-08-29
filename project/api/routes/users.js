@@ -1,101 +1,23 @@
 const express = require("express");
 const router = express.Router();
-
-const { generateToken, validateToken } = require("../config/tokens");
 const { validateAuth } = require("../middlewares/auth");
-const Users = require("../models/Users.js");
-const Cart = require("../models/Cart");
 
-router.get("/me", validateAuth, (req, res) => {
-  res.send(req.user);
-});
+const {
+  getAllUser,
+  getUserById,
+  createUser,
+  login,
+  getProfile,
+  editUser,
+  deleteUser,
+} = require("../controllers/users");
 
-router.get("/", (req, res, next) => {
-  Users.findAll()
-    .then((users) => {
-      return res.send(users);
-    })
-    .catch(next);
-});
-
-router.get("/:id", function (req, res, next) {
-  Users.findOne({
-    where: {
-      id: req.params.id,
-    },
-  }).then((user) => res.send(user));
-});
-
-router.post("/", (req, res) => {
-  Users.findOne({
-    where: { email: req.body.email },
-  }).then((userFound) => {
-    userFound
-      ? res.send({ error: "User already exists" })
-      : Users.create(req.body)
-          .then((user) => {
-            res.status(201).send(user);
-          })
-          .catch((error) => {
-            res.status(400).send(error);
-          });
-  });
-});
-
-router.post("/login", (req, res) => {
-  const { email, password } = req.body;
-
-  Users.findOne({ where: { email } }).then((user) => {
-    if (!user) return res.sendStatus(401);
-    user.validatePassword(password).then((isValid) => {
-      if (!isValid) return res.sendStatus(401);
-
-      const payload = {
-        email: user.email,
-        name: user.name,
-        isAdmin: user.isAdmin,
-        avatar: user.avatar,
-      };
-
-      const token = generateToken(payload);
-
-      res.cookie("token", token);
-
-      res.send(payload);
-    });
-  });
-});
-
-router.post("/logout", (req, res) => {
-  const { token } = req.cookies;
-  console.log(token, "este es el token");
-  const { user } = validateToken(token);
-  console.log(user, "este es el user");
-  const cart = req.body;
-  console.log(cart, "este es el cart");
-
-  if (cart.length > 0) {
-    user.addCart(cart);
-  }
-  res.clearCookie("connect.sid", { path: "/" }).status(200).send("done");
-});
-
-router.put("/:id", (req, res) => {
-  Users.update(req.body, {
-    where: { id: req.params.id },
-    returning: true,
-  }).then(([affectedRows, updated]) => {
-    const user = updated[0];
-    res.status(201).send(user);
-  });
-});
-
-router.delete("/admin/:id", (req, res) => {
-  Users.destroy({
-    where: {
-      id: req.params.id,
-    },
-  }).then((resp) => res.sendStatus(202));
-});
+router.get("/me", validateAuth, getProfile);
+router.get("/", getAllUser);
+router.get("/:id", getUserById);
+router.post("/", createUser);
+router.post("/login", login);
+router.put("/:id", editUser);
+router.delete("/:id", deleteUser);
 
 module.exports = router;
