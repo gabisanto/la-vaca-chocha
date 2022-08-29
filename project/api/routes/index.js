@@ -9,8 +9,9 @@ const ordersRoutes = require("./orders");
 
 router.use("/users", usersRoutes);
 router.use("/products", productsRoutes);
-router.use("/cart", cartRoutes);
 router.use("/category", categoryRoutes);
+
+router.use("/cart", cartRoutes);
 router.use("/checkout", checkoutRoutes);
 router.use("/orders", ordersRoutes);
 

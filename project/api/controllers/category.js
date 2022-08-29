@@ -51,6 +51,18 @@ const editCategory = async (req, res, next) => {
   const category = update[0];
   res.send(category);
 };
+const getCategoryById = async (req, res, next) => {
+  try {
+    const category = await Categories.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.send(category);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 module.exports = {
   getProductsByCategory,
@@ -58,4 +70,5 @@ module.exports = {
   createCategory,
   deleteCategory,
   editCategory,
+  getCategoryById
 };
