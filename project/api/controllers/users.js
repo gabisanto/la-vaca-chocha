@@ -64,8 +64,10 @@ const login = async (req, res) => {
       const payload = {
         email: user.email,
         name: user.name,
+        isAdmin: user.isAdmin,
       };
       const token = generateToken(payload);
+      console.log(payload, "payload del back");
       res.send({ payload, token });
     });
   } catch (error) {
