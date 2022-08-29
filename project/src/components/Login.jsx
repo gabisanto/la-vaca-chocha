@@ -32,15 +32,22 @@ const Login = () => {
     dispatch(sendLoginRequest(data))
       .then(({ payload }) => {
         if (payload) {
+          console.log(payload, "esto es payload");
           setLoginStatus("success");
-          setTimeout(() => navigate("/"), 3000);
+          setTimeout(() => {
+            setLoginStatus("");
+            navigate("/profile");
+          }, 3000);
         } else {
           setLoginStatus("error");
           setTimeout(() => setLoginStatus(""), 3000);
           reset();
         }
       })
-      .catch(() => navigate("/404"));
+      .catch((err) => {
+        console.log(err);
+        navigate("/404");
+      });
   };
   return (
     <div

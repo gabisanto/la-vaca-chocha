@@ -133,7 +133,7 @@ const Navbar = () => {
                   component="img"
                   sx={{
                     height: matches ? 60 : 50,
-                    pr: matches ? null : 2,
+                    pr: matches ? 3 : 2,
                   }}
                   alt="Your logo."
                   src={logo}
@@ -143,8 +143,10 @@ const Navbar = () => {
                   noWrap
                   component="div"
                   sx={{ display: { xs: "none", sm: "block" } }}
+                  fontFamily={"Pacifico"}
+                  fontSize={32}
                 >
-                  la vaca chocha
+                  La vaca chocha
                 </Typography>
               </div>
             </Link>
