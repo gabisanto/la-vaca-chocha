@@ -15,8 +15,6 @@ const CreateProduct = () => {
   const categories = useSelector((state) => state.categories);
   const products = useSelector((state) => state.products);
 
-  console.log(products);
-
   /* inicio dispatch */
   const dispatch = useDispatch();
 
@@ -48,13 +46,7 @@ const CreateProduct = () => {
       });
   };
   return (
-    <div
-      style={{
-        backgroundColor: "#f1e9da",
-        padding: 10,
-      }}
-      className="back"
-    >
+    <div className="backProd">
       <Container
         maxWidth={matches ? "xs" : "m"}
         sx={{

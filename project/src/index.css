@@ -98,6 +98,22 @@ code {
   }
 }
 
+/* crear/editar producto */
+
+.backProd {
+  margin-top: 64px;
+  background-color: #f1e9da;
+  height: 100vh;
+  padding-top: 20px;
+}
+
+@media (max-width: 600px) {
+  .backProd {
+    padding: 50px;
+    margin-top: 56px;
+  }
+}
+
 /* para la burbuja de cantidad de carrito */
 
 .badge {

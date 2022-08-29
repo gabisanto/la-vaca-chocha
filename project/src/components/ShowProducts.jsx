@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Banner from "../commons/Banner/Banner";
+import AlertMessage from "../commons/AlertMessage";
+import { deleteProduct } from "../store/products";
 import { Link } from "react-router-dom";
 import {
   Typography,
@@ -22,6 +24,25 @@ const ShowProducts = () => {
   const products = useSelector((state) => state.products);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  /* status del mensaje de delete */
+  const [deleteStatus, setDeleteStatus] = useState("");
+
+  const handleDelete = (product) => {
+    dispatch(deleteProduct(product))
+      .then(() => {
+        setDeleteStatus("success");
+        setTimeout(() => {
+          setDeleteStatus("");
+        }, 3000);
+      })
+      .catch(() => {
+        setDeleteStatus("error");
+        setTimeout(() => {
+          setDeleteStatus("");
+        }, 3000);
+      });
+  };
 
   return (
     <div style={{ backgroundColor: "#e0e0e0", paddingBottom: 30 }}>
@@ -82,6 +103,7 @@ const ShowProducts = () => {
                           },
                         }}
                         endIcon={<DeleteIcon />}
+                        onClick={() => handleDelete(producto)}
                       >
                         Borrar producto
                       </Button>
@@ -147,6 +169,16 @@ const ShowProducts = () => {
           })}
         </Grid>
       </Container>
+      {deleteStatus && (
+        <AlertMessage
+          type={deleteStatus}
+          message={
+            deleteStatus === "success"
+              ? `Producto borrado correctamente`
+              : `Hubo algún problema`
+          }
+        />
+      )}
     </div>
   );
 };
