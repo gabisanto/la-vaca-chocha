@@ -4,6 +4,8 @@ import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
+import { editProduct } from "../store/products";
 import useMatches from "../hooks/useMatches";
 import AlertMessage from "../commons/AlertMessage";
 import styles from "../styles/userpages.module.css";
@@ -12,9 +14,13 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const EditProduct = () => {
+  /* traigo las categorías */
+  const categories = useSelector((state) => state.categories);
   /* starting navigate */
   const navigate = useNavigate();
   const { id } = useParams();
+  /* inicio dispatch */
+  const dispatch = useDispatch();
   /* media queries */
   const matches = useMatches();
   const [product, setProduct] = useState({});
@@ -36,35 +42,28 @@ const EditProduct = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
-    /* axios
-       .post("http://localhost:3001/api/products", data) */
-    /* manejo errores */
-    /* .then(({ data }) => {
-         if (data.name) {
-           console.log(data, "esto es data");
-           setCreateStatus("success");
-           setTimeout(() => setCreateStatus(""), 3000);
-           reset();
-         }
-       })
-       .catch(() => {
-         setCreateStatus("error");
-         setTimeout(() => setCreateStatus(""), 3000);
-         reset();
-       }); */
+    dispatch(editProduct({ ...data, id }))
+      /* manejo errores */
+      .then(({ payload }) => {
+        if (payload.name) {
+          setEditStatus("success");
+          setTimeout(() => {
+            setEditStatus("");
+            navigate(`/product/${payload.id}`);
+          }, 3000);
+        }
+      })
+      .catch(() => {
+        setEditStatus("error");
+        setTimeout(() => setEditStatus(""), 3000);
+        reset();
+      });
   };
 
   if (!product.name) return <CircularProgress color="success" />;
 
   return (
-    <div
-      style={{
-        backgroundColor: "#f1e9da",
-      }}
-      className={styles.backImg}
-    >
-      {console.log(product.name)}
+    <div className="backProd">
       <Container
         maxWidth={matches ? "xs" : "m"}
         sx={{
@@ -136,18 +135,27 @@ const EditProduct = () => {
           <Box sx={{ display: "flex", alignItems: "flex-end" }} mb={2}>
             <BorderColorIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
             <TextField
-              id="input-with-sx"
-              name="category"
-              fullWidth
+              id="category-id"
+              select
               label="Categoría"
+              defaultValue={product?.categoryId}
+              fullWidth
+              SelectProps={{
+                native: true,
+              }}
               variant="standard"
-              defaultValue={product?.category}
-              {...register("category", {
+              {...register("categoryId", {
                 required: "La categoría es obligatoria",
               })}
-              error={!!errors?.category}
-              helperText={errors?.category ? errors.category.message : null}
-            />
+              error={!!errors?.categoryId}
+              helperText={errors?.categoryId ? errors.categoryId.message : null}
+            >
+              {categories.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.name}
+                </option>
+              ))}
+            </TextField>
           </Box>
 
           <Box sx={{ display: "flex", alignItems: "flex-end" }} mb={2}>
@@ -181,7 +189,7 @@ const EditProduct = () => {
               },
             }}
           >
-            Crear producto
+            Editar producto
           </Button>
         </form>
         {editStatus && (

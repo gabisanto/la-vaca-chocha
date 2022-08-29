@@ -1,0 +1,36 @@
+.App {
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.slick-slide > div {
+  margin: 0 10px;
+}
+
+.slick-list {
+  margin: 0 -10px;
+}
+
+.card {
+  background: rgb(255, 255, 255);
+
+  overflow: hidden;
+  height: 400px;
+  color: rgb(87, 87, 87);
+}
+
+.card-top {
+  height: 75%;
+}
+
+.card-bottom {
+  font-size: 1rem;
+  padding: 10px;
+}
+
+.card-top > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

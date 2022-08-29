@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { createProduct } from "../store/products";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import useMatches from "../hooks/useMatches";
@@ -9,6 +11,13 @@ import { TextField, Container, Box, Button } from "@mui/material";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 
 const CreateProduct = () => {
+  /* traigo las categorías */
+  const categories = useSelector((state) => state.categories);
+  const products = useSelector((state) => state.products);
+
+  /* inicio dispatch */
+  const dispatch = useDispatch();
+
   /* media queries */
   const matches = useMatches();
 
@@ -21,13 +30,10 @@ const CreateProduct = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
-    axios
-      .post("http://localhost:3001/api/products", data)
+    dispatch(createProduct(data))
       /* manejo errores */
-      .then(({ data }) => {
-        if (data.name) {
-          console.log(data, "esto es data");
+      .then(({ payload }) => {
+        if (payload.name) {
           setCreateStatus("success");
           setTimeout(() => setCreateStatus(""), 3000);
           reset();
@@ -40,12 +46,7 @@ const CreateProduct = () => {
       });
   };
   return (
-    <div
-      style={{
-        backgroundColor: "#f1e9da",
-      }}
-      className={styles.backImg}
-    >
+    <div className="backProd">
       <Container
         maxWidth={matches ? "xs" : "m"}
         sx={{
@@ -114,17 +115,26 @@ const CreateProduct = () => {
           <Box sx={{ display: "flex", alignItems: "flex-end" }} mb={2}>
             <BorderColorIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
             <TextField
-              id="input-with-sx"
-              name="category"
-              fullWidth
+              id="category-id"
+              select
               label="Categoría"
+              fullWidth
+              SelectProps={{
+                native: true,
+              }}
               variant="standard"
-              {...register("category", {
+              {...register("categoryId", {
                 required: "La categoría es obligatoria",
               })}
-              error={!!errors?.category}
-              helperText={errors?.category ? errors.category.message : null}
-            />
+              error={!!errors?.categoryId}
+              helperText={errors?.categoryId ? errors.categoryId.message : null}
+            >
+              {categories.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.name}
+                </option>
+              ))}
+            </TextField>
           </Box>
 
           <Box sx={{ display: "flex", alignItems: "flex-end" }} mb={2}>
@@ -140,6 +150,22 @@ const CreateProduct = () => {
               })}
               error={!!errors?.stock}
               helperText={errors?.stock ? errors.stock.message : null}
+            />
+          </Box>
+
+          <Box sx={{ display: "flex", alignItems: "flex-end" }} mb={2}>
+            <BorderColorIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
+            <TextField
+              id="input-with-sx"
+              name="image"
+              fullWidth
+              label="Link de imagen"
+              variant="standard"
+              {...register("image", {
+                required: "La imagen es obligatoria",
+              })}
+              error={!!errors?.image}
+              helperText={errors?.image ? errors.image.message : null}
             />
           </Box>
 
