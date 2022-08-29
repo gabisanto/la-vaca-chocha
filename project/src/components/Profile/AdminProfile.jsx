@@ -100,7 +100,7 @@ const AdminProfile = ({ user }) => {
                   },
                 }}
               >
-                Lista de productos
+                Ver productos
               </Button>
             </Link>
             <Link to="/categories">
@@ -119,7 +119,7 @@ const AdminProfile = ({ user }) => {
                   },
                 }}
               >
-                Lista de categorías
+                Ver categorías
               </Button>
             </Link>
             <Link to="/product/create">
