@@ -77,13 +77,12 @@ const login = async (req, res) => {
 
 const editUser = async (req, res) => {
   try {
-    Users.update(req.body, {
+    const [row, update] = await Users.update(req.body, {
       where: { id: req.params.id },
       returning: true,
-    }).then(([affectedRows, updated]) => {
-      const user = updated[0];
-      res.status(201).send(user);
     });
+    const user = update[0];
+    res.send(user);
   } catch (error) {
     console.log(error);
   }
