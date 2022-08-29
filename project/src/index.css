@@ -115,6 +115,14 @@ code {
   }
 }
 
+/* detalle de producto */
+
+.backDetail {
+  background-color: #f1e9da;
+  height: 100%;
+  padding-bottom: 50px;
+}
+
 /* para la burbuja de cantidad de carrito */
 
 .badge {

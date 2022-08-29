@@ -13,6 +13,7 @@ export default function AlertDialog({
   item,
   title,
   message,
+  opacity,
 }) {
   const [open, setOpen] = React.useState(openDialog);
 
@@ -28,7 +29,7 @@ export default function AlertDialog({
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        sx={{ opacity: 0.3 }}
+        sx={{ opacity: opacity }}
       >
         <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
         <DialogContent>
