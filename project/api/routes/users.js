@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const { validateAuth } = require("../middlewares/auth");
 
+//RUTAS TESTEADAS MENOS "/ME"
+
 const {
   getAllUser,
   getUserById,
