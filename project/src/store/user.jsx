@@ -4,7 +4,7 @@ import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 export const sendLoginRequest = createAsyncThunk("LOGIN", (data) => {
   return axios
     .post("http://localhost:3001/api/users/login", data)
-    .then((res) => res.data);
+    .then((res) => res.data.payload);
 });
 
 export const sendLogoutRequest = createAsyncThunk("LOGOUT", (cart) => {
