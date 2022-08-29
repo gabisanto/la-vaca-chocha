@@ -76,8 +76,8 @@ const HomeSlider = () => {
   return (
     <div className="App">
       <Slider {...settings}>
-        {dataSlider.map((item) => (
-          <div className="card">
+        {dataSlider.map((item, index) => (
+          <div key={index} className="card">
             <div className="card-top">
               <img src={item.src} alt={item.name} />
             </div>
