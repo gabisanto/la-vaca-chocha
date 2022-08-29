@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Banner from "../commons/Banner/Banner";
 import AlertMessage from "../commons/AlertMessage";
+import ConfirmDialog from "../commons/ConfirmDialog";
 import { deleteProduct } from "../store/products";
 import { Link } from "react-router-dom";
 import {
@@ -43,6 +44,10 @@ const ShowProducts = () => {
         }, 3000);
       });
   };
+
+  /* experimental pop up de confirmación */
+
+  const [openDialog, setOpenDialog] = useState(false);
 
   return (
     <div style={{ backgroundColor: "#e0e0e0", paddingBottom: 30 }}>
@@ -103,7 +108,9 @@ const ShowProducts = () => {
                           },
                         }}
                         endIcon={<DeleteIcon />}
-                        onClick={() => handleDelete(producto)}
+                        onClick={
+                          () => setOpenDialog(true) /* handleDelete(producto) */
+                        }
                       >
                         Borrar producto
                       </Button>
@@ -164,6 +171,16 @@ const ShowProducts = () => {
                     </CardActions>
                   )}
                 </Card>
+                {openDialog && (
+                  <ConfirmDialog
+                    title={"¿Desea eliminar este producto?"}
+                    message={"Esta acción es irreversible."}
+                    handleDelete={handleDelete}
+                    item={producto}
+                    openDialog={openDialog}
+                    stateChanger={setOpenDialog}
+                  />
+                )}
               </Grid>
             );
           })}

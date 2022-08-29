@@ -6,33 +6,45 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export default function AlertDialog({ openDialog }) {
+export default function AlertDialog({
+  openDialog,
+  stateChanger,
+  handleDelete,
+  item,
+  title,
+  message,
+}) {
   const [open, setOpen] = React.useState(openDialog);
 
   const handleClose = () => {
     setOpen(false);
+    stateChanger(false);
   };
 
   return (
     <div>
-      {console.log("estoy en el dialogo")}
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        sx={{ opacity: 0.3 }}
       >
-        <DialogTitle id="alert-dialog-title">
-          {"¿Desea borrar elemento?"}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            ¿Desea borrar el producto? Esta acción es irreversible.
+            {message}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button
+            onClick={() => {
+              handleDelete(item);
+              handleClose();
+            }}
+            autoFocus
+          >
             Aceptar
           </Button>
         </DialogActions>
