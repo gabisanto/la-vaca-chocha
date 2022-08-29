@@ -103,8 +103,9 @@ code {
 .backProd {
   margin-top: 64px;
   background-color: #f1e9da;
-  height: 100vh;
+  height: 100%;
   padding-top: 20px;
+  padding-bottom: 30px;
 }
 
 @media (max-width: 600px) {

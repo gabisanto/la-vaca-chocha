@@ -4,6 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getCategories } from "./store/categories";
 import { getProducts } from "./store/products";
+import Test from "./components/Test";
 import ProductsCard from "./components/ProductsCard";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -34,6 +35,7 @@ const App = () => {
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/test" element={<Test />} />
           <Route path="login" element={<Login />} />
           {!user.email && <Route path="register" element={<Register />} />}
           {user.email && <Route path="profile" element={<Profile />} />}
