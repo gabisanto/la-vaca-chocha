@@ -1,8 +1,15 @@
 const Users = require("../models/Users.js");
 const { generateToken } = require("../config/tokens");
 
-const getProfile = (req, res) => {
-  res.send(req.user);
+const getProfile = async (req, res) => {
+  try {
+    const verifyToken = validateToken(req.body.token);
+    const user = await Users.findByPk(verifyToken.user);
+
+    if (user) return res.send({ name: user.name, lastname: user.lastname });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const getAllUser = async (req, res, next) => {
