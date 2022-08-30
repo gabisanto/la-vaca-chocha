@@ -12,16 +12,19 @@ import ConfirmDialog from "../commons/ConfirmDialog";
 import { deleteProduct } from "../store/products";
 import styles from "../styles/userpages.module.css";
 import "../index.css";
-import HeartFav from "../commons/HeartFav";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import useMatches from "../hooks/useMatches";
+import { Favorite } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
 const ProductsCard = () => {
+  const navigate = useNavigate();
   /* media queries */
 
   const matches = useMatches();
@@ -43,7 +46,7 @@ const ProductsCard = () => {
       .then((data) => {
         setProducts(data);
       });
-  }, []);
+  }, [id]);
 
   /* status del mensaje de delete */
   const [deleteStatus, setDeleteStatus] = useState("");
@@ -54,6 +57,7 @@ const ProductsCard = () => {
         setDeleteStatus("success");
         setTimeout(() => {
           setDeleteStatus("");
+          navigate("/product");
         }, 3000);
       })
       .catch(() => {
@@ -67,6 +71,11 @@ const ProductsCard = () => {
   /* experimental pop up de confirmación */
 
   const [openDialog, setOpenDialog] = useState(false);
+
+  /* para saber las categorías del producto */
+  if (!products.id) return "cargando";
+  let prodcat = products["categoryId"];
+  let productCategory = categories.filter((cat) => prodcat.includes(cat.id));
 
   return (
     <div className="backDetail">
@@ -86,12 +95,13 @@ const ProductsCard = () => {
           sx={{
             display: "flex",
             width: "100%",
+            height: matches ? 600 : "100%",
             flexDirection: matches ? null : "column",
             borderRadius: 1,
           }}
         >
           <CardMedia
-            sx={{ width: matches ? "40%" : "100%" }}
+            sx={{ width: matches ? "50%" : "100%", objectFit: "contain" }}
             component="img"
             image={products.image}
             alt={products.name}
@@ -99,7 +109,7 @@ const ProductsCard = () => {
 
           <Card
             sx={{
-              width: matches ? "60%" : "100%",
+              width: matches ? "50%" : "100%",
               padding: 5,
               borderRadius: 0,
             }}
@@ -107,8 +117,41 @@ const ProductsCard = () => {
             <CardContent>
               <Typography fontFamily={"Acme"} fontSize={30} component="div">
                 {products.name}
-                <HeartFav />
               </Typography>
+
+              <div
+                style={{
+                  padding: 1,
+                  display: "flex",
+                  flexWrap: "wrap",
+                  flexDirection: "row",
+                  height: "fit-content",
+                }}
+              >
+                {productCategory.map((cat) => (
+                  <Link
+                    to={`/categories/${cat.name}`}
+                    key={cat.id}
+                    style={{ width: 40 }}
+                  >
+                    <img
+                      title={cat.name}
+                      src={cat.image}
+                      style={{
+                        padding: 2,
+                        height: 40,
+                      }}
+                      alt={cat.name}
+                    />
+                  </Link>
+                ))}
+              </div>
+              <CardActions style={{ padding: 0, marginBottom: 5 }}>
+                <IconButton>
+                  <Favorite sx={{ color: "#bf665e" }} />
+                </IconButton>
+                <p style={{ paddingLeft: 5 }}>Agregar a favoritos</p>
+              </CardActions>
               <Typography
                 sx={{ mb: 1.5, mt: 1.5, fontSize: 20, fontWeight: "bold" }}
                 color="black"
@@ -119,6 +162,7 @@ const ProductsCard = () => {
                 {products.description}
                 <br />
               </Typography>
+
               <br />
               <Typography
                 sx={{ fontSize: 14 }}
@@ -147,7 +191,7 @@ const ProductsCard = () => {
                     () => setOpenDialog(true) /* handleDelete(producto) */
                   }
                 >
-                  Borrar producto
+                  Borrar
                 </Button>
                 <Link
                   to={`/product/edit/${products.id}`}
@@ -167,7 +211,7 @@ const ProductsCard = () => {
                     }}
                     endIcon={<EditIcon />}
                   >
-                    Editar producto
+                    Editar
                   </Button>
                 </Link>
               </CardActions>
