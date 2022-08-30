@@ -20,7 +20,7 @@ import Profile from "./components/Profile/Index.jsx";
 import CartDemo from "./components/CartDemo";
 import Payment from "./components/Payment";
 import Home from "./components/Home";
-import Users from "./components/Users";
+import Users from "./components/Users/Users";
 import Navbar from "./components/Navbar";
 
 const App = () => {
@@ -46,12 +46,6 @@ const App = () => {
           <Route path="404" element={<NotFound />} />
           <Route path="categories" element={<Categories />} />
           <Route path="categories/:category" element={<CategoryProducts />} />
-          {user.isAdmin && (
-            <Route path="categories/create" element={<CreateCategory />} />
-          )}
-          {user.isAdmin && (
-            <Route path="categories/edit/:id" element={<EditCategory />} />
-          )}
           <Route path="product/:id" element={<ProductsCard />} />
           <Route path="product" element={<ShowProducts />} />
           <Route path="product/search" element={<Search />} />
@@ -63,6 +57,12 @@ const App = () => {
             <Route path="product/edit/:id" element={<EditProduct />} />
           )}
           {user.isAdmin && <Route path="users" element={<Users />} />}
+          {user.isAdmin && (
+            <Route path="categories/create" element={<CreateCategory />} />
+          )}
+          {user.isAdmin && (
+            <Route path="categories/edit/:id" element={<EditCategory />} />
+          )}
           <Route path="*" element={<Navigate to="404" />} />
         </Routes>
       </div>

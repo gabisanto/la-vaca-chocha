@@ -20,9 +20,9 @@ function priceRow(qty, unit) {
   return qty * unit;
 }
 
-function subtotal(items) {
+/* function subtotal(items) {
   return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
-}
+} */
 
 export default function Cart() {
   /* media queries */

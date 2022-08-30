@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createCategory } from "../store/categories";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";

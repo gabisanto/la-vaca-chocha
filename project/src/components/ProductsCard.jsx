@@ -10,7 +10,6 @@ import Banner from "../commons/Banner/Banner";
 import AlertMessage from "../commons/AlertMessage";
 import ConfirmDialog from "../commons/ConfirmDialog";
 import { deleteProduct } from "../store/products";
-import styles from "../styles/userpages.module.css";
 import "../index.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";

@@ -28,11 +28,9 @@ const Login = () => {
   } = useForm();
   /* realizando el login */
   const onSubmit = (data) => {
-    console.log(data);
     dispatch(sendLoginRequest(data))
       .then(({ payload }) => {
         if (payload) {
-          console.log(payload, "esto es payload");
           setLoginStatus("success");
           setTimeout(() => {
             setLoginStatus("");

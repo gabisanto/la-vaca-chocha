@@ -1,18 +1,16 @@
-import { useState } from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { React, useState } from "react";
 import { IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import axios from "axios";
 import AlertMessage from "../../commons/AlertMessage";
 import ConfirmDialog from "../../commons/ConfirmDialog";
-import { deleteCategory } from "../../store/categories";
-import { useDispatch } from "react-redux";
-
-const DeleteActions = ({ cat }) => {
-  const dispatch = useDispatch();
+const DeleteUser = ({ user }) => {
   /* status del mensaje de delete */
   const [deleteStatus, setDeleteStatus] = useState("");
 
-  const handleDelete = (category) => {
-    dispatch(deleteCategory(category))
+  const handleDelete = (userToDelete) => {
+    axios
+      .delete(`http://localhost:3001/api/users/${userToDelete.id}`)
       .then(() => {
         setDeleteStatus("success");
         setTimeout(() => {
@@ -30,13 +28,11 @@ const DeleteActions = ({ cat }) => {
   /* pop up de confirmación */
 
   const [openDialog, setOpenDialog] = useState(false);
-
   return (
-    <>
+    <div>
       <IconButton
         onClick={(e) => {
           e.preventDefault();
-
           setOpenDialog(true);
         }}
       >
@@ -44,11 +40,11 @@ const DeleteActions = ({ cat }) => {
       </IconButton>
       {openDialog && (
         <ConfirmDialog
-          title={"¿Desea eliminar esta categoría?"}
+          title={"¿Desea eliminar este usuario?"}
           message={"Esta acción es irreversible."}
           handleDelete={handleDelete}
           opacity={1}
-          item={cat}
+          item={user}
           openDialog={openDialog}
           stateChanger={setOpenDialog}
         />
@@ -58,13 +54,13 @@ const DeleteActions = ({ cat }) => {
           type={deleteStatus}
           message={
             deleteStatus === "success"
-              ? `Producto borrado correctamente`
+              ? `Usuario borrado correctamente`
               : `Hubo algún problema`
           }
         />
       )}
-    </>
+    </div>
   );
 };
 
-export default DeleteActions;
+export default DeleteUser;

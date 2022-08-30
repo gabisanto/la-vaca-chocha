@@ -1,28 +1,28 @@
 import { useState } from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { IconButton } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import axios from "axios";
 import AlertMessage from "../../commons/AlertMessage";
 import ConfirmDialog from "../../commons/ConfirmDialog";
-import { deleteCategory } from "../../store/categories";
-import { useDispatch } from "react-redux";
 
-const DeleteActions = ({ cat }) => {
-  const dispatch = useDispatch();
+const EditAdmin = ({ user }) => {
   /* status del mensaje de delete */
-  const [deleteStatus, setDeleteStatus] = useState("");
+  const [editStatus, setEditStatus] = useState("");
 
-  const handleDelete = (category) => {
-    dispatch(deleteCategory(category))
+  const handleEdit = (userToEdit) => {
+    let data = { isAdmin: !userToEdit.isAdmin };
+    axios
+      .put(`http://localhost:3001/api/users/${userToEdit.id}`, data)
       .then(() => {
-        setDeleteStatus("success");
+        setEditStatus("success");
         setTimeout(() => {
-          setDeleteStatus("");
+          setEditStatus("");
         }, 3000);
       })
       .catch(() => {
-        setDeleteStatus("error");
+        setEditStatus("error");
         setTimeout(() => {
-          setDeleteStatus("");
+          setEditStatus("");
         }, 3000);
       });
   };
@@ -30,41 +30,41 @@ const DeleteActions = ({ cat }) => {
   /* pop up de confirmación */
 
   const [openDialog, setOpenDialog] = useState(false);
-
   return (
-    <>
+    <div>
       <IconButton
         onClick={(e) => {
           e.preventDefault();
-
           setOpenDialog(true);
         }}
       >
-        <DeleteIcon />
+        <EditIcon />
       </IconButton>
       {openDialog && (
         <ConfirmDialog
-          title={"¿Desea eliminar esta categoría?"}
-          message={"Esta acción es irreversible."}
-          handleDelete={handleDelete}
+          title={"¿Desea editar este usuario?"}
+          message={
+            "Esta acción modificará los permisos del usuario. Proceda con precaución"
+          }
+          handleDelete={handleEdit}
           opacity={1}
-          item={cat}
+          item={user}
           openDialog={openDialog}
           stateChanger={setOpenDialog}
         />
       )}
-      {deleteStatus && (
+      {editStatus && (
         <AlertMessage
-          type={deleteStatus}
+          type={editStatus}
           message={
-            deleteStatus === "success"
-              ? `Producto borrado correctamente`
+            editStatus === "success"
+              ? `Usuario editado correctamente`
               : `Hubo algún problema`
           }
         />
       )}
-    </>
+    </div>
   );
 };
 
-export default DeleteActions;
+export default EditAdmin;
