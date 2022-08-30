@@ -130,7 +130,7 @@ const AdminProfile = ({ user }) => {
                 size="large"
                 sx={{
                   fontWeight: "bold",
-
+                  marginBottom: 1,
                   backgroundColor: "#03A696",
                   "&:hover": {
                     backgroundColor: "#04BF9D",
@@ -139,6 +139,25 @@ const AdminProfile = ({ user }) => {
                 }}
               >
                 Nuevo producto
+              </Button>
+            </Link>
+            <Link to="/categories/create">
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                size="large"
+                sx={{
+                  fontWeight: "bold",
+
+                  backgroundColor: "#03A696",
+                  "&:hover": {
+                    backgroundColor: "#04BF9D",
+                    color: "#757575",
+                  },
+                }}
+              >
+                Nueva categoría
               </Button>
             </Link>
           </div>

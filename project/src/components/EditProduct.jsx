@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { editProduct } from "../store/products";
 import useMatches from "../hooks/useMatches";
 import AlertMessage from "../commons/AlertMessage";
-import styles from "../styles/userpages.module.css";
+import { Link } from "react-router-dom";
 import { TextField, Container, Box, Button } from "@mui/material";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -221,6 +221,24 @@ const EditProduct = () => {
             Editar producto
           </Button>
         </form>
+        <Link to="/product">
+          <Button
+            variant="contained"
+            fullWidth
+            size="large"
+            sx={{
+              fontWeight: "bold",
+              mt: 1,
+              backgroundColor: "#03A696",
+              "&:hover": {
+                backgroundColor: "#04BF9D",
+                color: "#757575",
+              },
+            }}
+          >
+            Volver
+          </Button>
+        </Link>
         {editStatus && (
           <AlertMessage
             type={editStatus}
