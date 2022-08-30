@@ -87,6 +87,7 @@ const Search = () => {
                         variant="h5"
                         component="div"
                         style={{ color: "black" }}
+                        fontFamily={"Acme"}
                       >
                         {producto.name}
                       </Typography>

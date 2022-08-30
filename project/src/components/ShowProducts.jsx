@@ -14,6 +14,7 @@ import {
   CardContent,
   CardActions,
   CardMedia,
+  Pagination,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -25,6 +26,17 @@ const ShowProducts = () => {
   const products = useSelector((state) => state.products);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  //PAGINATION
+
+  const [pageNumber,setPageNumber] = useState(0)
+  const productsPerPage = 5
+  const pagesVisited = pageNumber * productsPerPage
+
+  const displayProducts = products.slice(pagesVisited,pagesVisited + productsPerPage)
+  const changePage = (selected) =>{
+    setPageNumber(selected.target.textContent -1)  
+  }
 
   /* status del mensaje de delete */
   const [deleteStatus, setDeleteStatus] = useState("");
@@ -59,7 +71,7 @@ const ShowProducts = () => {
       />
       <Container sx={{ p: "0 5", backgroundColor: "#e0e0e0", borderRadius: 1 }}>
         <Grid container my={4} sx={{ mb: 0 }}>
-          {products?.map((producto) => {
+          {displayProducts?.map((producto) => {
             return (
               <Grid item xs={12} sm={6} md={4} p={2} key={producto.id}>
                 <Card>
@@ -198,6 +210,8 @@ const ShowProducts = () => {
           }
         />
       )}
+
+<Pagination count={Math.ceil(products.length/productsPerPage)} onChange={changePage}/>
     </div>
   );
 };
