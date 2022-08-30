@@ -36,7 +36,7 @@ export default function Cart() {
 
   return (
     <div
-      style={{ backgroundColor: "#e0e0e0", paddingBottom: 35, height: "100vh" }}
+      style={{ backgroundColor: "#e0e0e0", paddingBottom: 100, height: "100%" }}
     >
       <Banner
         text={"Carrito de compras"}

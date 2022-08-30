@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getCategories } from "./store/categories";
 import { getProducts } from "./store/products";
 import Categories from "./components/Category/Categories";
+import CategoryProducts from "./components/CategoryProducts";
 import ProductsCard from "./components/ProductsCard.jsx";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -42,11 +43,9 @@ const App = () => {
           {cart.length > 0 && <Route path="payment" element={<Payment />} />}
           <Route path="404" element={<NotFound />} />
           <Route path="categories" element={<Categories />} />
-          {/* 
-          
-          <Route path="categories/:category"> element={<Category />
-          
-           */}
+
+          <Route path="categories/:category" element={<CategoryProducts />} />
+
           <Route path="product/:id" element={<ProductsCard />} />
           <Route path="product" element={<ShowProducts />} />
           <Route path="product/search" element={<Search />} />
