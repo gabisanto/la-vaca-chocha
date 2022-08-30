@@ -173,6 +173,17 @@ export default function TemporaryDrawer({ openStatus, stateChanger, user }) {
               />
             </ListItem>
           </Link>
+          <Link to="/profile" style={{ textDecoration: "none" }}>
+            <ListItem sx={{ paddingLeft: 5, "&:hover": { cursor: "pointer" } }}>
+              <ListItemIcon sx={{ color: "black" }}>
+                <AccountCircle />
+              </ListItemIcon>
+              <ListItemText
+                primary={"Mi perfil"}
+                sx={{ textDecorarion: "none", color: "black" }}
+              />
+            </ListItem>
+          </Link>
           <ListItem sx={{ paddingLeft: 5, "&:hover": { cursor: "pointer" } }}>
             <ListItemIcon sx={{ color: "black" }}>
               <ListAlt />
@@ -198,6 +209,11 @@ export default function TemporaryDrawer({ openStatus, stateChanger, user }) {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
+                <Link to={`/categories/`} className="linksBlack">
+                  <Typography style={{ fontWeight: "bold" }}>
+                    Ver todas
+                  </Typography>
+                </Link>
                 {categories.map((cat) => (
                   <Link
                     to={`/categories/${cat.name}`}
@@ -229,17 +245,7 @@ export default function TemporaryDrawer({ openStatus, stateChanger, user }) {
               />
             </ListItem>
           </Link>
-          <Link to="/profile" style={{ textDecoration: "none" }}>
-            <ListItem sx={{ paddingLeft: 5, "&:hover": { cursor: "pointer" } }}>
-              <ListItemIcon sx={{ color: "black" }}>
-                <AccountCircle />
-              </ListItemIcon>
-              <ListItemText
-                primary={"Mi perfil"}
-                sx={{ textDecorarion: "none", color: "black" }}
-              />
-            </ListItem>
-          </Link>
+
           <ListItem
             sx={{ paddingLeft: 5, "&:hover": { cursor: "pointer" } }}
             onClick={handleLogout}

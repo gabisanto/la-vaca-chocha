@@ -79,6 +79,7 @@ const ShowProducts = () => {
                         variant="h5"
                         component="div"
                         style={{ color: "black" }}
+                        fontFamily={"Acme"}
                       >
                         {producto.name}
                       </Typography>
@@ -176,6 +177,7 @@ const ShowProducts = () => {
                     title={"¿Desea eliminar este producto?"}
                     message={"Esta acción es irreversible."}
                     handleDelete={handleDelete}
+                    opacity={0.3}
                     item={producto}
                     openDialog={openDialog}
                     stateChanger={setOpenDialog}

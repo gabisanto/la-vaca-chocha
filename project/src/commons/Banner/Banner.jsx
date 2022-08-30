@@ -6,10 +6,10 @@ const Banner = ({ text, image }) => {
   return (
     <div className="cardBanner">
       <div
-        class="banner_background_img"
+        className="banner_background_img"
         style={{ backgroundImage: `url(${imageBack})` }}
       ></div>
-      <div class="textBanner">{text}</div>
+      <div className="textBanner">{text}</div>
     </div>
   );
 };

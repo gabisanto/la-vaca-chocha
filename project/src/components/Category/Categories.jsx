@@ -1,6 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Banner from "../../commons/Banner/Banner";
+import Category from "./Category";
+import { Link } from "react-router-dom";
+import "./category.css";
 const Categories = () => {
   const categories = useSelector((state) => state.categories);
   console.log(categories);
@@ -12,7 +15,17 @@ const Categories = () => {
           "https://alpina.com/media/mageplaza/blog/post/d/e/descubre-los-cereales-indipensables.jpg"
         }
       />
-      {/* acá va el map */}
+      <div className="catContainer">
+        {categories.map((cat) => (
+          <Link
+            key={cat.id}
+            className="linksBlack"
+            to={`/category/${cat.name}`}
+          >
+            <Category cat={cat} />
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };
