@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getCategories } from "./store/categories";
 import { getProducts } from "./store/products";
 import Categories from "./components/Category/Categories";
-import ProductsCard from "./components/ProductsCard";
+import ProductsCard from "./components/ProductsCard.jsx";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import NotFound from "./components/NotFound";
