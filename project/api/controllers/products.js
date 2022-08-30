@@ -56,12 +56,12 @@ const searchProducts = async (req, res, next) => {
         [Op.or]: [
           {
             name: {
-              [Op.like]: "%" + req.params.query + "%",
+              [Op.iLike]: "%" + req.params.query + "%",
             },
           },
           {
             description: {
-              [Op.like]: "%" + req.params.query + "%",
+              [Op.iLike]: "%" + req.params.query + "%",
             },
           },
         ],
