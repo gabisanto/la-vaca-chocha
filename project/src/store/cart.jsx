@@ -28,9 +28,12 @@ const Reducer = (cart = [], action) => {
     });
     return tempcart;
   }
-  if (action.type === "RESET") {
-    return [];
+
+  if (action.type === "RESET"){
+    cart.splice(0,cart.length)    
+    return cart
   }
-  return cart;
+  return cart
+
 };
 export default Reducer;
