@@ -64,6 +64,7 @@ export default function TemporaryDrawer({ openStatus, stateChanger, user }) {
     dispatch(sendLogoutRequest(cart))
       .then(() => {
         window.localStorage.clear();
+        dispatch({type:"RESET"})
       })
       .catch((err) => console.log("Ocurrió un error", err));
   };

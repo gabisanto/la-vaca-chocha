@@ -28,6 +28,12 @@ const Reducer = (cart = [], action) => {
     });
     return tempcart;
   }
-  return cart;
+  if (action.type === "RESET"){
+    cart.splice(0,cart.length)    
+    return cart
+  }
+  return cart
+  
+
 };
 export default Reducer;
