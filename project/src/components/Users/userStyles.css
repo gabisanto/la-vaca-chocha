@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Acme&display=swap");
 
-.catContainer {
+.usersContainer {
   width: 90%;
   display: flex;
   flex-direction: row;
@@ -12,14 +12,14 @@
 }
 
 @media (max-width: 600px) {
-  .catContainer {
+  .usersContainer {
     flex-direction: column;
     width: 100%;
     justify-content: center;
   }
 }
 
-.catMain {
+.usersMain {
   transition: box-shadow 0.3s;
   width: fit-content;
   margin: 10px;
@@ -32,26 +32,34 @@
   border-radius: 4px;
 }
 
-.catMain:hover {
+.usersMain:hover {
   box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
   cursor: pointer;
 }
 
 @media (max-width: 600px) {
-  .catMain {
+  .usersMain {
     width: 100%;
     margin: 10px 0;
     justify-self: center;
   }
 }
 
-.catImage {
+.usersImage {
   height: 40px;
 }
 
-.catName {
+.usersName {
   font-size: 24px;
   font-family: "Acme", sans-serif;
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 1px solid #ccc !important;
+}
+
+.usersRole {
+  font-size: 12px;
+  font-weight: bold;
   margin-left: 10px;
   padding-left: 10px;
   border-left: 1px solid #ccc !important;

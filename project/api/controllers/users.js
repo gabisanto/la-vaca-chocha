@@ -15,7 +15,13 @@ const getProfile = async (req, res) => {
 const getAllUser = async (req, res, next) => {
   try {
     let user = await Users.findAll();
-    res.send(user);
+    let payload = user.map(({ id, name, email, isAdmin }) => ({
+      id,
+      name,
+      email,
+      isAdmin,
+    }));
+    res.send(payload);
   } catch (error) {
     console.log(error);
   }
@@ -82,7 +88,13 @@ const editUser = async (req, res) => {
       returning: true,
     });
     const user = update[0];
-    res.send(user);
+    const payload = {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      isAdmin: user.isAdmin,
+    };
+    res.send(payload);
   } catch (error) {
     console.log(error);
   }

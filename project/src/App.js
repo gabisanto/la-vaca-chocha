@@ -6,6 +6,8 @@ import { getCategories } from "./store/categories";
 import { getProducts } from "./store/products";
 import Categories from "./components/Category/Categories";
 import CategoryProducts from "./components/CategoryProducts";
+import CreateCategory from "./components/CreateCategory";
+import EditCategory from "./components/EditCategory";
 import ProductsCard from "./components/ProductsCard.jsx";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -18,7 +20,7 @@ import Profile from "./components/Profile/Index.jsx";
 import CartDemo from "./components/CartDemo";
 import Payment from "./components/Payment";
 import Home from "./components/Home";
-import Users from "./components/Users";
+import Users from "./components/Users/Users";
 import Navbar from "./components/Navbar";
 
 const App = () => {
@@ -43,9 +45,7 @@ const App = () => {
           {cart.length > 0 && <Route path="payment" element={<Payment />} />}
           <Route path="404" element={<NotFound />} />
           <Route path="categories" element={<Categories />} />
-
           <Route path="categories/:category" element={<CategoryProducts />} />
-
           <Route path="product/:id" element={<ProductsCard />} />
           <Route path="product" element={<ShowProducts />} />
           <Route path="product/search" element={<Search />} />
@@ -57,6 +57,12 @@ const App = () => {
             <Route path="product/edit/:id" element={<EditProduct />} />
           )}
           {user.isAdmin && <Route path="users" element={<Users />} />}
+          {user.isAdmin && (
+            <Route path="categories/create" element={<CreateCategory />} />
+          )}
+          {user.isAdmin && (
+            <Route path="categories/edit/:id" element={<EditCategory />} />
+          )}
           <Route path="*" element={<Navigate to="404" />} />
         </Routes>
       </div>

@@ -20,7 +20,7 @@ const Categories = () => {
           <Link
             key={cat.id}
             className="linksBlack"
-            to={`/category/${cat.name}`}
+            to={`/categories/${cat.name}`}
           >
             <Category cat={cat} />
           </Link>

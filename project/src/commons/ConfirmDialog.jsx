@@ -38,9 +38,17 @@ export default function AlertDialog({
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancelar</Button>
           <Button
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
+              handleClose();
+            }}
+          >
+            Cancelar
+          </Button>
+          <Button
+            onClick={(e) => {
+              e.preventDefault();
               handleDelete(item);
               handleClose();
             }}
