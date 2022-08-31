@@ -136,8 +136,6 @@ const getFavorites = async (req, res) => {
 
 const addFavorites = (req, res) => {
   const { userId, product } = req.body;
-  console.log(product);
-
   Favorites.create({
     idProduct: product.id,
   }).then((product) => {
@@ -151,9 +149,8 @@ const addFavorites = (req, res) => {
 };
 
 const deleteFavorites = (req, res) => {
-
   const { userId, product } = req.body;
-  console.log(req.body);
+
   Users.findByPk(userId, { include: "favorites" })
     .then((user) => {
       let faveId = user["favorites"].find(
@@ -188,7 +185,6 @@ const logout = async (req, res) => {
     res.send(carts);
   }
 };
-
 
 module.exports = {
   getAllUser,

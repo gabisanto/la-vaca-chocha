@@ -23,15 +23,19 @@ export const removeFavorites = createAsyncThunk("REMOVE FAVES", (data) => {
     .then(() => {
       let dataReturn = { ...data.product, idProduct: data.product.id };
       return dataReturn;
-    })
-
-export const sendLogoutRequest = createAsyncThunk("LOGOUT", (cart, thunkAPI) => {
-  const { user } = thunkAPI.getState();
-  return axios
-    .post("http://localhost:3001/api/users/logout", {cart, user})
-
-    .catch((err) => console.log("Something happened", err));
+    });
 });
+
+export const sendLogoutRequest = createAsyncThunk(
+  "LOGOUT",
+  (cart, thunkAPI) => {
+    const { user } = thunkAPI.getState();
+    return axios
+      .post("http://localhost:3001/api/users/logout", { cart, user })
+
+      .catch((err) => console.log("Something happened", err));
+  }
+);
 
 const userReducer = createReducer([], {
   [sendLoginRequest.fulfilled]: (state, action) => action.payload,
