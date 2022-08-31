@@ -206,7 +206,7 @@ const ShowProducts = () => {
                     title={"¿Desea eliminar este producto?"}
                     message={"Esta acción es irreversible."}
                     handleDelete={handleDelete}
-                    opacity={0.3}
+                    opacity={0.5}
                     item={producto}
                     openDialog={openDialog}
                     stateChanger={setOpenDialog}
@@ -228,9 +228,12 @@ const ShowProducts = () => {
         />
       )}
 
-
-<Pagination count={Math.ceil(products.length/productsPerPage)} onChange={changePage} hidePrevButton hideNextButton/>
-
+      <Pagination
+        count={Math.ceil(products.length / productsPerPage)}
+        onChange={changePage}
+        hidePrevButton
+        hideNextButton
+      />
     </div>
   );
 };
