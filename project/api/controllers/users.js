@@ -36,8 +36,16 @@ const getUserById = async (req, res) => {
       where: {
         id: req.params.id,
       },
+      include: "favorites",
     });
-    res.send(user);
+    const payload = {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      isAdmin: user.isAdmin,
+      favorites: user.favorites,
+    };
+    res.send(payload);
   } catch (error) {
     console.log(error);
   }
@@ -65,15 +73,20 @@ const createUser = async (req, res) => {
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await Users.findOne({ where: { email } });
+    const user = await Users.findOne({
+      where: { email },
+      include: "favorites",
+    });
     if (!user) return res.sendStatus(401);
     user.validatePassword(password).then((isValid) => {
       if (!isValid) return res.sendStatus(401);
 
       const payload = {
+        id: user.id,
         email: user.email,
         name: user.name,
         isAdmin: user.isAdmin,
+        favorites: user.favorites,
       };
       const token = generateToken(payload);
       res.send({ payload, token });
@@ -130,7 +143,7 @@ const addFavorites = (req, res) => {
   }).then((product) => {
     Users.findOne({ where: { id: userId } })
       .then((user) => {
-        user.addFavorites(product);
+        user.addFavorites(product, { through: "favorites" });
         res.sendStatus(200);
       })
       .catch((e) => console.log(e));
@@ -138,9 +151,16 @@ const addFavorites = (req, res) => {
 };
 
 const deleteFavorites = (req, res) => {
-  const { userId, productId } = req.body;
-  Users.findByPk(userId)
-    .then((user) => user.removeFavorite(productId))
+
+  const { userId, product } = req.body;
+  console.log(req.body);
+  Users.findByPk(userId, { include: "favorites" })
+    .then((user) => {
+      let faveId = user["favorites"].find(
+        (fave) => fave.idProduct === product.id
+      ).id;
+      user.removeFavorite(faveId);
+    })
     .then(() => res.sendStatus(200))
     .catch((err) => res.status(500).send(err));
 };
@@ -168,6 +188,7 @@ const logout = async (req, res) => {
     res.send(carts);
   }
 };
+
 
 module.exports = {
   getAllUser,

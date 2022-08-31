@@ -89,11 +89,10 @@ const Navbar = () => {
 
   const onSubmit = async (data) => {
     try {
-      console.log("data",data.searchInput);
       const resp = await axios.get(
         `http://localhost:3001/api/products/search/${data.searchInput}`
       );
-     
+
       const results = await resp.data;
       navigate("/product/search", { state: { results } });
       reset();
