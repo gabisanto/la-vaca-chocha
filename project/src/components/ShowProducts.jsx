@@ -233,6 +233,7 @@ const ShowProducts = () => {
       <Pagination
         count={Math.ceil(products.length / productsPerPage)}
         onChange={changePage}
+        sx={{ display: "flex", flexDirection: "row", justifyContent: "center" }}
         hidePrevButton
         hideNextButton
       />
