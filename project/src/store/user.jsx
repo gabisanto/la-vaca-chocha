@@ -32,7 +32,6 @@ export const sendLogoutRequest = createAsyncThunk(
     const { user } = thunkAPI.getState();
     return axios
       .post("http://localhost:3001/api/users/logout", { cart, user })
-
       .catch((err) => console.log("Something happened", err));
   }
 );
