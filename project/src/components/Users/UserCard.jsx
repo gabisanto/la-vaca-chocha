@@ -4,7 +4,7 @@ import EditAdmin from "./EditAdmin";
 import { useSelector } from "react-redux";
 import "./userStyles.css";
 
-const UserCard = ({ userDetail }) => {
+const UserCard = ({ userDetail, stateChanger, users }) => {
   const admin = useSelector((state) => state.user);
   return (
     <div className="usersMain">
@@ -26,9 +26,16 @@ const UserCard = ({ userDetail }) => {
 
       {userDetail.email !== admin.email && (
         <>
-          <DeleteUser user={userDetail} />
-
-          <EditAdmin user={userDetail} />
+          <DeleteUser
+            user={userDetail}
+            users={users}
+            stateChanger={stateChanger}
+          />
+          <EditAdmin
+            user={userDetail}
+            users={users}
+            stateChanger={stateChanger}
+          />
         </>
       )}
     </div>

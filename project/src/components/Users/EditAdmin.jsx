@@ -5,7 +5,7 @@ import axios from "axios";
 import AlertMessage from "../../commons/AlertMessage";
 import ConfirmDialog from "../../commons/ConfirmDialog";
 
-const EditAdmin = ({ user }) => {
+const EditAdmin = ({ user, users, stateChanger }) => {
   /* status del mensaje de delete */
   const [editStatus, setEditStatus] = useState("");
 
@@ -13,8 +13,10 @@ const EditAdmin = ({ user }) => {
     let data = { isAdmin: !userToEdit.isAdmin };
     axios
       .put(`http://localhost:3001/api/users/${userToEdit.id}`, data)
-      .then(() => {
+      .then((res) => {
         setEditStatus("success");
+        let newUsers = users.filter((user) => user.id !== userToEdit.id);
+        stateChanger([...newUsers, res.data].sort((a, b) => a.id - b.id));
         setTimeout(() => {
           setEditStatus("");
         }, 3000);

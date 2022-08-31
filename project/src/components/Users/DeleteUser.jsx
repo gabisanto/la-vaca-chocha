@@ -4,7 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import AlertMessage from "../../commons/AlertMessage";
 import ConfirmDialog from "../../commons/ConfirmDialog";
-const DeleteUser = ({ user }) => {
+const DeleteUser = ({ user, users, stateChanger }) => {
   /* status del mensaje de delete */
   const [deleteStatus, setDeleteStatus] = useState("");
 
@@ -13,6 +13,8 @@ const DeleteUser = ({ user }) => {
       .delete(`http://localhost:3001/api/users/${userToDelete.id}`)
       .then(() => {
         setDeleteStatus("success");
+        let newUsers = users.filter((user) => user.id !== userToDelete.id);
+        stateChanger(newUsers.sort((a, b) => a.id - b.id));
         setTimeout(() => {
           setDeleteStatus("");
         }, 3000);

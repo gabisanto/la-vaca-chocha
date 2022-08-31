@@ -12,9 +12,9 @@ const Users = () => {
       .get("http://localhost:3001/api/users")
       .then((res) => res.data)
       .then((data) => {
-        setUsers(data);
+        setUsers(data.sort((a, b) => a.id - b.id));
       });
-  });
+  }, []);
 
   if (users.length === 0) return "Cargando";
 
@@ -28,7 +28,12 @@ const Users = () => {
       />
       <div className="usersContainer">
         {users.map((user) => (
-          <UserCard key={user.id} userDetail={user} />
+          <UserCard
+            key={user.id}
+            userDetail={user}
+            users={users}
+            stateChanger={setUsers}
+          />
         ))}
       </div>
     </div>
