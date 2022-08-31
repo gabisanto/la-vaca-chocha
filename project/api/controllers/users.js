@@ -137,13 +137,20 @@ const addFavorites = (req, res) => {
 };
 
 const deleteFavorites = (req, res) => {
-  const { userId, productId } = req.query;
+  const { userId, productId } = req.body;
   Users.findByPk(userId)
     .then((user) => user.removeFavorite(productId))
     .then(() => res.sendStatus(200))
     .catch((err) => res.status(500).send(err));
+};
 
-}
+const logout = async (req, res) => {
+  const { products, userId } = req.body;
+  const cart = await Cart.create({ userId: userId, products: products });
+  res.send(cart);
+};
+
+
 module.exports = {
   getAllUser,
   getUserById,
