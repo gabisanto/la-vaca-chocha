@@ -211,7 +211,7 @@ const ShowProducts = () => {
         />
       )}
 
-<Pagination count={Math.ceil(products.length/productsPerPage)} onChange={changePage}/>
+<Pagination count={Math.ceil(products.length/productsPerPage)} onChange={changePage} hidePrevButton hideNextButton/>
     </div>
   );
 };
