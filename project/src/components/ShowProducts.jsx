@@ -99,16 +99,18 @@ const ShowProducts = () => {
                       >
                         {producto.name}
                       </Typography>
-                      <CardActions
-                        style={{
-                          padding: 0,
-                          marginBottom: 5,
-                          color: "black",
-                        }}
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <FavoriteActions product={producto} user={user} />
-                      </CardActions>
+                      {user.email && (
+                        <CardActions
+                          style={{
+                            padding: 0,
+                            marginBottom: 5,
+                            color: "black",
+                          }}
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          <FavoriteActions product={producto} user={user} />
+                        </CardActions>
+                      )}
                       <Typography variant="body2" color="text.secondary">
                         {producto.description}
                       </Typography>
