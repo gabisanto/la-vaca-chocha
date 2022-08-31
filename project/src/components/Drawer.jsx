@@ -61,7 +61,7 @@ export default function TemporaryDrawer({ openStatus, stateChanger, user }) {
   const handleLogout = function () {
     navigate("/");
 
-    dispatch(sendLogoutRequest({ cart: cart, id: user.id }))
+    dispatch(sendLogoutRequest(cart))
       .then(() => {
         window.localStorage.clear();
 
