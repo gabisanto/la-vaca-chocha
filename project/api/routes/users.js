@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const { validateAuth } = require("../middlewares/auth");
 
-//RUTAS TESTEADAS MENOS "/ME"
-
 const {
   getAllUser,
   getUserById,
@@ -12,8 +10,11 @@ const {
   getProfile,
   editUser,
   deleteUser,
+  addFavorites,
+  deleteFavorites,
+  getFavorites,
 } = require("../controllers/users");
-
+//USERS
 router.get("/me", validateAuth, getProfile);
 router.get("/", getAllUser);
 router.get("/:id", getUserById);
@@ -21,5 +22,8 @@ router.post("/", createUser);
 router.post("/login", login);
 router.put("/:id", editUser);
 router.delete("/:id", deleteUser);
-
+//FAVORITES
+router.post("/favorites", addFavorites);
+router.get("/favorites/:id", getFavorites);
+router.delete("/favorites", deleteFavorites);
 module.exports = router;

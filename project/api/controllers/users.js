@@ -1,4 +1,5 @@
 const Users = require("../models/Users.js");
+const Favorites = require("../models/Favorites");
 const { generateToken, validateToken } = require("../config/tokens");
 
 const getProfile = async (req, res) => {
@@ -101,6 +102,36 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const getFavorites = async (req, res) => {
+  const id = req.params.id;
+  const resp = await Users.findOne({ where: { id: id }, include: "favorites" });
+  res.send(resp.favorites);
+};
+
+const addFavorites = (req, res) => {
+  const { userId, product } = req.body;
+  console.log(product);
+
+  Favorites.create({
+    idProduct: product.id,
+  }).then((product) => {
+    Users.findOne({ where: { id: userId } })
+      .then((user) => {
+        user.addFavorites(product);
+        res.sendStatus(200);
+      })
+      .catch((e) => console.log(e));
+  });
+};
+
+const deleteFavorites = (req, res) => {
+  const { userId, productId } = req.query;
+  Users.findByPk(userId)
+    .then((user) => user.removeFavorite(productId))
+    .then(() => res.sendStatus(200))
+    .catch((err) => res.status(500).send(err));
+
+}
 module.exports = {
   getAllUser,
   getUserById,
@@ -109,4 +140,7 @@ module.exports = {
   getProfile,
   editUser,
   deleteUser,
+  getFavorites,
+  addFavorites,
+  deleteFavorites,
 };
