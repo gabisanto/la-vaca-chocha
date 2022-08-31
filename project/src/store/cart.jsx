@@ -28,6 +28,9 @@ const Reducer = (cart = [], action) => {
     });
     return tempcart;
   }
+  if (action.type === "RESET") {
+    return [];
+  }
   return cart;
 };
 export default Reducer;

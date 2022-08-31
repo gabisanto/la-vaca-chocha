@@ -8,7 +8,7 @@ import Categories from "./components/Category/Categories";
 import CategoryProducts from "./components/CategoryProducts";
 import CreateCategory from "./components/CreateCategory";
 import EditCategory from "./components/EditCategory";
-import ProductsCard from "./components/ProductsCard.jsx";
+import ProductsCard from "./components/ProductsCard/ProductsCard";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import NotFound from "./components/NotFound";

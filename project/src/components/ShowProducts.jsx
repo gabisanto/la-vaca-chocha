@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Banner from "../commons/Banner/Banner";
+import FavoriteActions from "./ProductsCard/FavoriteActions";
 import AlertMessage from "../commons/AlertMessage";
 import ConfirmDialog from "../commons/ConfirmDialog";
 import { deleteProduct } from "../store/products";
@@ -29,14 +30,17 @@ const ShowProducts = () => {
 
   //PAGINATION
 
-  const [pageNumber,setPageNumber] = useState(0)
-  const productsPerPage = 5
-  const pagesVisited = pageNumber * productsPerPage
+  const [pageNumber, setPageNumber] = useState(0);
+  const productsPerPage = 5;
+  const pagesVisited = pageNumber * productsPerPage;
 
-  const displayProducts = products.slice(pagesVisited,pagesVisited + productsPerPage)
-  const changePage = (selected) =>{
-    setPageNumber(selected.target.textContent -1)  
-  }
+  const displayProducts = products.slice(
+    pagesVisited,
+    pagesVisited + productsPerPage
+  );
+  const changePage = (selected) => {
+    setPageNumber(selected.target.textContent - 1);
+  };
 
   /* status del mensaje de delete */
   const [deleteStatus, setDeleteStatus] = useState("");
@@ -95,12 +99,25 @@ const ShowProducts = () => {
                       >
                         {producto.name}
                       </Typography>
+                      <CardActions
+                        style={{
+                          padding: 0,
+                          marginBottom: 5,
+                          color: "black",
+                        }}
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        <FavoriteActions product={producto} user={user} />
+                      </CardActions>
                       <Typography variant="body2" color="text.secondary">
                         {producto.description}
                       </Typography>
                       <br />
+
                       <Typography variant="h6" color="text.secondary">
-                        $ {producto.price}
+                        <p style={{ fontWeight: "bold", color: "black" }}>
+                          $ {producto.price}
+                        </p>
                       </Typography>
                     </CardContent>
                   </Link>
@@ -211,7 +228,10 @@ const ShowProducts = () => {
         />
       )}
 
-<Pagination count={Math.ceil(products.length/productsPerPage)} onChange={changePage}/>
+      <Pagination
+        count={Math.ceil(products.length / productsPerPage)}
+        onChange={changePage}
+      />
     </div>
   );
 };
