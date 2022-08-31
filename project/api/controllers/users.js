@@ -1,6 +1,8 @@
 const Users = require("../models/Users.js");
 const Favorites = require("../models/Favorites");
+const Cart = require("../models/Cart");
 const { generateToken, validateToken } = require("../config/tokens");
+const { findOne } = require("../models/Users.js");
 
 const getProfile = async (req, res) => {
   try {
@@ -74,7 +76,6 @@ const login = async (req, res) => {
         isAdmin: user.isAdmin,
       };
       const token = generateToken(payload);
-      console.log(payload, "payload del back");
       res.send({ payload, token });
     });
   } catch (error) {
@@ -145,11 +146,28 @@ const deleteFavorites = (req, res) => {
 };
 
 const logout = async (req, res) => {
-  const { products, userId } = req.body;
-  const cart = await Cart.create({ userId: userId, products: products });
-  res.send(cart);
-};
+  const { cart, user } = req.body;
+  const users = await Users.findOne({ where: { email: user.email } });
+  const userId = users.dataValues.id;
 
+  const carts = await Cart.findOne({ where: { userId: userId } });
+
+  if (carts) {
+    Cart.update(
+      { userId: userId, products: cart },
+      {
+        where: { userId: userId },
+        returning: true,
+      }
+    ).then(([affectedRows, updated]) => {
+      const cart = updated[0];
+      res.status(201).send(cart);
+    });
+  } else {
+    Cart.create({ userId: userId, products: cart });
+    res.send(carts);
+  }
+};
 
 module.exports = {
   getAllUser,
@@ -162,4 +180,5 @@ module.exports = {
   getFavorites,
   addFavorites,
   deleteFavorites,
+  logout,
 };

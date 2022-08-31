@@ -13,6 +13,7 @@ const {
   addFavorites,
   deleteFavorites,
   getFavorites,
+  logout
 } = require("../controllers/users");
 //USERS
 router.get("/me", validateAuth, getProfile);
@@ -20,6 +21,7 @@ router.get("/", getAllUser);
 router.get("/:id", getUserById);
 router.post("/", createUser);
 router.post("/login", login);
+router.post("/logout", logout);
 router.put("/:id", editUser);
 router.delete("/:id", deleteUser);
 //FAVORITES
