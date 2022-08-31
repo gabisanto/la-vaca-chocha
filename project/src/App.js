@@ -8,6 +8,7 @@ import Categories from "./components/Category/Categories";
 import CategoryProducts from "./components/CategoryProducts";
 import CreateCategory from "./components/CreateCategory";
 import EditCategory from "./components/EditCategory";
+import UserFavorites from "./components/UserFavorites";
 import ProductsCard from "./components/ProductsCard/ProductsCard.jsx";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -41,6 +42,7 @@ const App = () => {
           <Route path="login" element={<Login />} />
           {!user.email && <Route path="register" element={<Register />} />}
           {user.email && <Route path="profile" element={<Profile />} />}
+          {user.email && <Route path="favorites" element={<UserFavorites />} />}
           <Route path="cart" element={<CartDemo />} />
           {cart.length > 0 && <Route path="payment" element={<Payment />} />}
           <Route path="404" element={<NotFound />} />

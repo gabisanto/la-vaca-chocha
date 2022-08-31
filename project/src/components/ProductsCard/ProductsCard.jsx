@@ -117,9 +117,11 @@ const ProductsCard = () => {
               <Typography fontFamily={"Acme"} fontSize={30} component="div">
                 {products.name}
               </Typography>
-              <CardActions style={{ padding: 0, marginBottom: 5 }}>
-                <FavoriteActions product={products} user={user} />
-              </CardActions>
+              {user.email && (
+                <CardActions style={{ padding: 0, marginBottom: 5 }}>
+                  <FavoriteActions product={products} user={user} />
+                </CardActions>
+              )}
 
               <div
                 style={{

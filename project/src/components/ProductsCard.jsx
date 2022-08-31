@@ -145,12 +145,14 @@ const ProductsCard = () => {
                   </Link>
                 ))}
               </div>
-              <CardActions style={{ padding: 0, marginBottom: 5 }}>
-                <IconButton>
-                  <Favorite sx={{ color: "#bf665e" }} />
-                </IconButton>
-                <p style={{ paddingLeft: 5 }}>Agregar a favoritos</p>
-              </CardActions>
+              {user.email && (
+                <CardActions style={{ padding: 0, marginBottom: 5 }}>
+                  <IconButton>
+                    <Favorite sx={{ color: "#bf665e" }} />
+                  </IconButton>
+                  <p style={{ paddingLeft: 5 }}>Agregar a favoritos</p>
+                </CardActions>
+              )}
               <Typography
                 sx={{ mb: 1.5, mt: 1.5, fontSize: 20, fontWeight: "bold" }}
                 color="black"
