@@ -7,9 +7,10 @@ export const sendLoginRequest = createAsyncThunk("LOGIN", (data) => {
     .then((res) => res.data.payload);
 });
 
-export const sendLogoutRequest = createAsyncThunk("LOGOUT", (cart) => {
+export const sendLogoutRequest = createAsyncThunk("LOGOUT", (cart, thunkAPI) => {
+  const { user } = thunkAPI.getState();
   return axios
-    .post("http://localhost:3001/api/users/logout", cart)
+    .post("http://localhost:3001/api/users/logout", {cart, user})
     .catch((err) => console.log("Something happened", err));
 });
 
