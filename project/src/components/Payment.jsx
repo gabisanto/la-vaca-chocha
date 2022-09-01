@@ -39,7 +39,7 @@ const Payment = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    const finalData = { ...data, cart, userId: user.id, email: user.email };
+    const finalData = { ...data, cart, userId: user.id, email: user.email, name: user.name };
     axios.post("http://localhost:3001/api/checkout", finalData);
     /* manejo errores */
     /* .then(({ data }) => {
