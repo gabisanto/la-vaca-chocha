@@ -26,7 +26,7 @@ const AdminProfile = ({ user }) => {
         <div className="count">
           <div className="user-actions">
             <div className="profileh3">Administrar Usuarios</div>
-            <Link to="/users">
+            <Link to="/users" style={{ textDecoration: "none" }}>
               <Button
                 type="submit"
                 variant="contained"
@@ -83,7 +83,7 @@ const AdminProfile = ({ user }) => {
           </div>
           <div className="product-actions">
             <div className="profileh3">Administrar productos</div>
-            <Link to="/product">
+            <Link to="/product" style={{ textDecoration: "none" }}>
               <Button
                 type="submit"
                 variant="contained"
@@ -103,7 +103,7 @@ const AdminProfile = ({ user }) => {
                 Ver productos
               </Button>
             </Link>
-            <Link to="/categories">
+            <Link to="/categories" style={{ textDecoration: "none" }}>
               <Button
                 type="submit"
                 variant="contained"
@@ -122,7 +122,7 @@ const AdminProfile = ({ user }) => {
                 Ver categorías
               </Button>
             </Link>
-            <Link to="/product/create">
+            <Link to="/product/create" style={{ textDecoration: "none" }}>
               <Button
                 type="submit"
                 variant="contained"
@@ -141,7 +141,7 @@ const AdminProfile = ({ user }) => {
                 Nuevo producto
               </Button>
             </Link>
-            <Link to="/categories/create">
+            <Link to="/categories/create" style={{ textDecoration: "none" }}>
               <Button
                 type="submit"
                 variant="contained"

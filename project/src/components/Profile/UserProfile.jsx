@@ -26,25 +26,25 @@ const UserProfile = ({ user }) => {
         <div class="count">
           <div class="user-profile">
             <div className="profileh3">Mi historial</div>
-            <Link to={`/orders/${user.id}`}>
-            <Button
-              type="submit"
-              variant="contained"
-              fullWidth
-              size="large"
-              sx={{
-                fontWeight: "bold",
-                marginBottom: 1,
-                marginTop: 2,
-                backgroundColor: "#03A696",
-                "&:hover": {
-                  backgroundColor: "#04BF9D",
-                  color: "#757575",
-                },
-              }}
-            >
-              Mis compras
-            </Button>
+            <Link to={`/orders/${user.id}`} style={{ textDecoration: "none" }}>
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                size="large"
+                sx={{
+                  fontWeight: "bold",
+                  marginBottom: 1,
+                  marginTop: 2,
+                  backgroundColor: "#03A696",
+                  "&:hover": {
+                    backgroundColor: "#04BF9D",
+                    color: "#757575",
+                  },
+                }}
+              >
+                Mis compras
+              </Button>
             </Link>
             <Button
               type="submit"
@@ -63,7 +63,7 @@ const UserProfile = ({ user }) => {
             >
               Mis comentarios
             </Button>
-            <Link to="/favorites">
+            <Link to="/favorites" style={{ textDecoration: "none" }}>
               <Button
                 type="submit"
                 variant="contained"
@@ -80,7 +80,6 @@ const UserProfile = ({ user }) => {
               >
                 Mis favoritos
               </Button>
-              
             </Link>
           </div>
         </div>
