@@ -14,6 +14,7 @@ import {
   LocalShipping,
   CreditCard,
 } from "@mui/icons-material";
+import axios from "axios";
 
 const Payment = () => {
   const cart = useSelector((state) => state.cart);
@@ -38,10 +39,8 @@ const Payment = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    const finalData = { ...data, cart, email: user.email };
-    console.log(finalData);
-    /* axios
-      .post("http://localhost:3001/api/users", data) */
+    const finalData = { ...data, cart, userId: user.id, email: user.email };
+    axios.post("http://localhost:3001/api/checkout", finalData);
     /* manejo errores */
     /* .then(({ data }) => {
         if (!data.error) {
