@@ -32,8 +32,13 @@ const Reducer = (cart = [], action) => {
   if (action.type === "RESET") return [];
 
   if (action.type === "SEED CART") {
-    console.log([...cart, action.payload]);
-    return [...cart, ...action.payload];
+    if (cart.length > 0) {
+      let cartIds = cart.map((element) => element.id);
+      let elementsToAdd = action.payload.filter(
+        (product) => !cartIds.includes(product.id)
+      );
+      return [...cart, ...elementsToAdd];
+    } else return [...cart, ...action.payload];
   }
 
   return cart;

@@ -2,6 +2,7 @@ import React from "react";
 import "./profile.css";
 import genericAvatar from "../../assets/happycow6.png";
 import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const UserProfile = ({ user }) => {
   return (
@@ -61,23 +62,24 @@ const UserProfile = ({ user }) => {
             >
               Mis comentarios
             </Button>
-
-            <Button
-              type="submit"
-              variant="contained"
-              fullWidth
-              size="large"
-              sx={{
-                fontWeight: "bold",
-                backgroundColor: "#03A696",
-                "&:hover": {
-                  backgroundColor: "#04BF9D",
-                  color: "#757575",
-                },
-              }}
-            >
-              Mis favoritos
-            </Button>
+            <Link to="/favorites">
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                size="large"
+                sx={{
+                  fontWeight: "bold",
+                  backgroundColor: "#03A696",
+                  "&:hover": {
+                    backgroundColor: "#04BF9D",
+                    color: "#757575",
+                  },
+                }}
+              >
+                Mis favoritos
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
