@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-const Cart = require("../models/Cart");
 const User = require("../models/Users");
 const transporter = require("../config/mailer")
+const {proceedPayment}= require("../controllers/checkout")
 
-router.post("/", (req, res) => {
+/* router.post("/", (req, res) => {
 
   //CONFIGURACION MOMENTANEA
   let mailOptions = {
@@ -23,6 +23,9 @@ router.post("/", (req, res) => {
       res.status(200).send(req.body);
     }
   });
-});
+}); */
+
+router.post("/",proceedPayment)
+
 
 module.exports = router;

@@ -14,4 +14,8 @@ const getProduct = async (req, res, next) => {
   }
 };
 
-module.exports = { getProduct };
+const deleteCart = async (id) => {
+  const cartDelete = await Cart.destroy({ where: { userId: id } });
+};
+
+module.exports = { getProduct, deleteCart };
