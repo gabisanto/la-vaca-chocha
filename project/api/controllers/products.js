@@ -17,9 +17,11 @@ const getProductBYId = async (req, res, next) => {
         id: req.params.id,
       },
     });
+    if (!productos.id) return res.sendStatus(404);
     res.send(productos);
   } catch (error) {
     console.log(error);
+    res.send(error);
   }
 };
 
@@ -74,7 +76,7 @@ const searchProducts = async (req, res, next) => {
 };
 
 const createProduct = async (req, res, next) => {
- const  {category}= req.body
+  const { category } = req.body;
   console.log(category);
   try {
     const product = await Products.create(req.body);

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useMatches from "../hooks/useMatches";
-import { useParams } from "react-router";
+import FavoriteActions from "./ProductsCard/FavoriteActions";
+import { useNavigate, useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import Banner from "../commons/Banner/Banner";
 import AlertMessage from "../commons/AlertMessage";
@@ -22,12 +23,14 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 const CategoryProducts = () => {
   const { category } = useParams();
+  const navigate = useNavigate();
   const categories = useSelector((state) => state.categories);
   const cart = useSelector((state) => state.cart);
   const products = useSelector((state) => state.products);
   const user = useSelector((state) => state.user);
   const matches = useMatches();
   const isolatedCat = categories.find((cat) => cat.name === category);
+
   const productsCategory = products.filter((product) =>
     product["categoryId"].includes(isolatedCat.id)
   );
@@ -138,12 +141,26 @@ const CategoryProducts = () => {
                       >
                         {producto.name}
                       </Typography>
+                      {user.email && (
+                        <CardActions
+                          style={{
+                            padding: 0,
+                            marginBottom: 5,
+                            color: "black",
+                          }}
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          <FavoriteActions product={producto} user={user} />
+                        </CardActions>
+                      )}
                       <Typography variant="body2" color="text.secondary">
                         {producto.description}
                       </Typography>
                       <br />
                       <Typography variant="h6" color="text.secondary">
-                        $ {producto.price}
+                        <p style={{ fontWeight: "bold", color: "black" }}>
+                          $ {producto.price}
+                        </p>
                       </Typography>
                     </CardContent>
                   </Link>
