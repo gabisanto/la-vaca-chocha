@@ -29,11 +29,13 @@ const Reducer = (cart = [], action) => {
     return tempcart;
   }
 
-  if (action.type === "RESET"){
-    cart.splice(0,cart.length)    
-    return cart
-  }
-  return cart
+  if (action.type === "RESET") return [];
 
+  if (action.type === "SEED CART") {
+    console.log([...cart, action.payload]);
+    return [...cart, ...action.payload];
+  }
+
+  return cart;
 };
 export default Reducer;
