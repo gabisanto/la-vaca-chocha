@@ -26,6 +26,7 @@ const UserProfile = ({ user }) => {
         <div class="count">
           <div class="user-profile">
             <div className="profileh3">Mi historial</div>
+            <Link to={`/orders/${user.id}`}>
             <Button
               type="submit"
               variant="contained"
@@ -44,7 +45,7 @@ const UserProfile = ({ user }) => {
             >
               Mis compras
             </Button>
-
+            </Link>
             <Button
               type="submit"
               variant="contained"
@@ -79,6 +80,7 @@ const UserProfile = ({ user }) => {
               >
                 Mis favoritos
               </Button>
+              
             </Link>
           </div>
         </div>
