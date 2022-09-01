@@ -1,8 +1,9 @@
 const OrderItem = require("../models/OrderItem");
 const {deleteCart}= require("../controllers/cart")
+const {sendEmail} = require("../config/mailer")
 
 const proceedPayment = async (req, res) => {
-  const { cart, userId, ...data } = req.body;
+  const { cart, userId, name, email, ...data } = req.body;
 
   let total = 0;
   cart.map((prod) => {
@@ -12,5 +13,6 @@ const proceedPayment = async (req, res) => {
   deleteCart(userId)
 
   res.send(order)
+  sendEmail(name, email)
 };
 module.exports = { proceedPayment };
