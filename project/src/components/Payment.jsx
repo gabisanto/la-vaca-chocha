@@ -15,6 +15,7 @@ import {
   CreditCard,
 } from "@mui/icons-material";
 import axios from "axios";
+ 
 
 const Payment = () => {
   const cart = useSelector((state) => state.cart);
@@ -38,21 +39,25 @@ const Payment = () => {
     reset,
     formState: { errors },
   } = useForm();
+
+  const [registerStatus, setRegisterStatus] = useState("");
+  const dispatch = useDispatch();
   const onSubmit = (data) => {
     const finalData = { ...data, cart, userId: user.id, email: user.email, name: user.name };
-    axios.post("http://localhost:3001/api/checkout", finalData);
+    axios.post("http://localhost:3001/api/checkout", finalData)
     /* manejo errores */
-    /* .then(({ data }) => {
+    .then(({ data }) => {
         if (!data.error) {
           setRegisterStatus("success");
-          setTimeout(() => navigate("/login"), 3000);
+          setTimeout(() => dispatch({ type: "RESET", payload: cart }), 3000);;
+          setTimeout(() => navigate("/"), 3000);
         } else {
           setRegisterStatus("error");
           setTimeout(() => setRegisterStatus(""), 3000);
           reset();
         }
       })
-      .catch(() => navigate("/404")); */
+      .catch(() => navigate("/404"));
   };
   return (
     <div
