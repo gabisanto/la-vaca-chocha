@@ -34,7 +34,9 @@ const EditProduct = () => {
     axios
       .get(`http://localhost:3001/api/products/${id}`)
       .then((data) => {
-        setProduct(data.data);
+        if (data.id) {
+          setProduct(data.data);
+        } else navigate("/404");
       })
       .catch(() => console.log("Error"));
   }, [id]);

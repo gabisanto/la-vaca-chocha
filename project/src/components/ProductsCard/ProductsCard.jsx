@@ -43,7 +43,13 @@ const ProductsCard = () => {
       .get(`http://localhost:3001/api/products/${id}`)
       .then((res) => res.data)
       .then((data) => {
-        setProducts(data);
+        if (data.id) {
+          setProducts(data);
+        } else navigate("/404");
+      })
+      .catch((err) => {
+        console.log("estoy en catch");
+        navigate("/404");
       });
   }, [id]);
 

@@ -8,11 +8,11 @@ import Categories from "./components/Category/Categories";
 import CategoryProducts from "./components/CategoryProducts";
 import CreateCategory from "./components/CreateCategory";
 import EditCategory from "./components/EditCategory";
-import UserFavorites from "./components/UserFavorites";
+import UserFavorites from "./components/FavoritesCard/UserFavorites.jsx";
 import ProductsCard from "./components/ProductsCard/ProductsCard.jsx";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import NotFound from "./components/NotFound";
+import NotFound from "./components/NotFound/NotFound.jsx";
 import CreateProduct from "./components/CreateProduct";
 import EditProduct from "./components/EditProduct";
 import ShowProducts from "./components/ShowProducts";
@@ -48,7 +48,7 @@ const App = () => {
           <Route path="404" element={<NotFound />} />
           <Route path="categories" element={<Categories />} />
           <Route path="categories/:category" element={<CategoryProducts />} />
-          <Route path="product/:id" element={<ProductsCard />} />
+          <Route path="product/:id/*" element={<ProductsCard />} />
           <Route path="product" element={<ShowProducts />} />
           <Route path="product/search" element={<Search />} />
           {/* rutas de admin */}
