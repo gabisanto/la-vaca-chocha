@@ -93,6 +93,7 @@ const ProductsCard = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+
           padding: 5,
         }}
       >
@@ -100,8 +101,9 @@ const ProductsCard = () => {
           sx={{
             display: "flex",
             width: "100%",
-            height: matches ? 600 : "100%",
+            height: matches ? 500 : "100%",
             flexDirection: matches ? null : "column",
+
             borderRadius: 1,
           }}
         >
@@ -117,6 +119,9 @@ const ProductsCard = () => {
               width: matches ? "50%" : "100%",
               padding: 5,
               borderRadius: 0,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
             }}
           >
             <CardContent>

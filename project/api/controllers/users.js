@@ -94,7 +94,7 @@ const login = async (req, res) => {
         name: user.name,
         isAdmin: user.isAdmin,
         favorites: user.favorites,
-        cart: cart,
+        cart: cart && cart.products.length > 0 ? cart : [],
       };
       const token = generateToken(payload);
       res.send({ payload, token });
