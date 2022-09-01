@@ -65,8 +65,7 @@ export default function TemporaryDrawer({ openStatus, stateChanger, user }) {
       .then(() => {
         window.localStorage.clear();
 
-        dispatch({ type: "RESET" });
-
+        dispatch({ type: "RESET", payload: cart });
       })
       .catch((err) => console.log("Ocurrió un error", err));
   };

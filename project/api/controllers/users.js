@@ -77,7 +77,14 @@ const login = async (req, res) => {
       where: { email },
       include: "favorites",
     });
+    const cart = await Cart.findOne({
+      where: {
+        userId: user.id,
+      },
+    });
+
     if (!user) return res.sendStatus(401);
+
     user.validatePassword(password).then((isValid) => {
       if (!isValid) return res.sendStatus(401);
 
@@ -87,6 +94,7 @@ const login = async (req, res) => {
         name: user.name,
         isAdmin: user.isAdmin,
         favorites: user.favorites,
+        cart: cart,
       };
       const token = generateToken(payload);
       res.send({ payload, token });

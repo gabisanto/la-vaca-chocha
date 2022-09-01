@@ -29,11 +29,18 @@ const Reducer = (cart = [], action) => {
     return tempcart;
   }
 
-  if (action.type === "RESET"){
-    cart.splice(0,cart.length)    
-    return cart
-  }
-  return cart
+  if (action.type === "RESET") return [];
 
+  if (action.type === "SEED CART") {
+    if (cart.length > 0) {
+      let cartIds = cart.map((element) => element.id);
+      let elementsToAdd = action.payload.filter(
+        (product) => !cartIds.includes(product.id)
+      );
+      return [...cart, ...elementsToAdd];
+    } else return [...cart, ...action.payload];
+  }
+
+  return cart;
 };
 export default Reducer;

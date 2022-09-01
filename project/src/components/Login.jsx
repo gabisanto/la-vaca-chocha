@@ -32,6 +32,9 @@ const Login = () => {
       .then(({ payload }) => {
         if (payload) {
           setLoginStatus("success");
+          if (payload.cart.products.length > 0)
+            dispatch({ type: "SEED CART", payload: payload.cart.products });
+          else console.log("no cart");
           setTimeout(() => {
             setLoginStatus("");
             navigate("/profile");
