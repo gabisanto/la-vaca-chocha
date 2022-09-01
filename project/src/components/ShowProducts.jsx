@@ -1,5 +1,5 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import SelectFilter from "../commons/SelectFilter";
 import Banner from "../commons/Banner/Banner";
 import FavoriteActions from "./ProductsCard/FavoriteActions";
 import AlertMessage from "../commons/AlertMessage";
@@ -28,13 +28,15 @@ const ShowProducts = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+  const [filterProducts, setFilterProducts] = useState([]);
+
   //PAGINATION
 
   const [pageNumber, setPageNumber] = useState(0);
   const productsPerPage = 5;
   const pagesVisited = pageNumber * productsPerPage;
 
-  const displayProducts = products.slice(
+  const displayProducts = filterProducts.slice(
     pagesVisited,
     pagesVisited + productsPerPage
   );
@@ -74,6 +76,11 @@ const ShowProducts = () => {
         }
       />
       <Container sx={{ p: "0 5", backgroundColor: "#e0e0e0", borderRadius: 1 }}>
+        <SelectFilter
+          products={products}
+          label={"Ordenar por"}
+          stateChanger={setFilterProducts}
+        />
         <Grid container my={4} sx={{ mb: 0 }}>
           {displayProducts?.map((producto) => {
             return (
