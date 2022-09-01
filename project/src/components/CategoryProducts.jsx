@@ -21,6 +21,7 @@ import {
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import { useEffect } from "react";
 const CategoryProducts = () => {
   const { category } = useParams();
   const navigate = useNavigate();
@@ -29,11 +30,8 @@ const CategoryProducts = () => {
   const products = useSelector((state) => state.products);
   const user = useSelector((state) => state.user);
   const matches = useMatches();
-  const isolatedCat = categories.find((cat) => cat.name === category);
 
-  const productsCategory = products.filter((product) =>
-    product["categoryId"].includes(isolatedCat.id)
-  );
+  const isolatedCat = categories.find((cat) => cat.name === category);
 
   const dispatch = useDispatch();
 
@@ -59,6 +57,12 @@ const CategoryProducts = () => {
   /* experimental pop up de confirmación */
 
   const [openDialog, setOpenDialog] = useState(false);
+
+  if (isolatedCat === undefined) return navigate("/404");
+
+  const productsCategory = products.filter((product) =>
+    product["categoryId"].includes(isolatedCat.id)
+  );
 
   if (productsCategory.length === 0)
     return (

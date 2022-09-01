@@ -9,7 +9,7 @@ const FavoriteActions = ({ user, product }) => {
 
   const dispatch = useDispatch();
   let data = { userId: user.id, product: product };
-  console.log(data);
+
   const handleAddFaves = () => {
     dispatch(addFavorites(data));
   };
