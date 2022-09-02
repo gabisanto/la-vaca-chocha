@@ -125,6 +125,11 @@ export default function TemporaryDrawer({ openStatus, stateChanger, user }) {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
+                <Link to={`/categories/`} className="linksBlack">
+                  <Typography style={{ fontWeight: "bold" }}>
+                    Ver todas
+                  </Typography>
+                </Link>
                 {categories.map((cat) => (
                   <Link
                     to={`/categories/${cat.name}`}
