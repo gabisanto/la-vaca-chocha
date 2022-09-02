@@ -12,6 +12,7 @@ const Home = () => {
       <div
         style={{
           paddingBottom: 33,
+          backgroundColor: "white",
         }}
       >
         <Container
