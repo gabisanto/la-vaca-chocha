@@ -63,23 +63,24 @@ const AdminProfile = ({ user }) => {
             >
               Ver comentarios
             </Button>
-
-            <Button
-              type="submit"
-              variant="contained"
-              fullWidth
-              size="large"
-              sx={{
-                fontWeight: "bold",
-                backgroundColor: "#03A696",
-                "&:hover": {
-                  backgroundColor: "#04BF9D",
-                  color: "#757575",
-                },
-              }}
-            >
-              Ver compras
-            </Button>
+            <Link to="/orders" style={{ textDecoration: "none" }}>
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                size="large"
+                sx={{
+                  fontWeight: "bold",
+                  backgroundColor: "#03A696",
+                  "&:hover": {
+                    backgroundColor: "#04BF9D",
+                    color: "#757575",
+                  },
+                }}
+              >
+                Ver compras
+              </Button>
+            </Link>
           </div>
           <div className="product-actions">
             <div className="profileh3">Administrar productos</div>
