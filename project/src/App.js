@@ -25,6 +25,7 @@ import Users from "./components/Users/Users";
 import Navbar from "./components/Navbar";
 import AllOrders from "./components/Orders/AllOrders";
 import UserOrders from "./components/Orders/UserOrders";
+import MisComentarios from "./components/MisComentarios";
 
 const App = () => {
   const cart = useSelector((state) => state.cart);
@@ -46,6 +47,7 @@ const App = () => {
           {user.email && <Route path="profile" element={<Profile />} />}
           {user.email && <Route path="favorites" element={<UserFavorites />} />}
           {user.email && <Route path="orders/:id" element={<UserOrders />} />}
+          {user.email && <Route path="comments" element={<MisComentarios />} />}
           <Route path="cart" element={<CartDemo />} />
           {cart.length > 0 && <Route path="payment" element={<Payment />} />}
           <Route path="404" element={<NotFound />} />

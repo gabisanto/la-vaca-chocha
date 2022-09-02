@@ -36,6 +36,13 @@ export const sendLogoutRequest = createAsyncThunk(
   }
 );
 
+export const addComment = createAsyncThunk("NEW COMMENT", (data) => {
+  return axios
+    .post("http://localhost:3001/api/users/comment", data)
+    .then((res) => res.data)
+    .catch((err) => console.log("Something happened", err));
+});
+
 const userReducer = createReducer([], {
   [sendLoginRequest.fulfilled]: (state, action) => action.payload,
   [sendLogoutRequest.fulfilled]: (state, action) => (state = {}),
@@ -47,6 +54,9 @@ const userReducer = createReducer([], {
       (element) => element.idProduct !== action.payload.idProduct
     );
     state.favorites = newFavorites;
+  },
+  [addComment.fulfilled]: (state, action) => {
+    state.comments.push(action.payload);
   },
 });
 

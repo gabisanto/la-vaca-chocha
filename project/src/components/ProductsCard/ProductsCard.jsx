@@ -15,12 +15,11 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import useMatches from "../../hooks/useMatches";
-import { Favorite, FavoriteBorder } from "@mui/icons-material";
-import { IconButton } from "@mui/material";
 import FavoriteActions from "./FavoriteActions";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import CommentsActions from "./CommentsActions";
 
 const ProductsCard = () => {
   const navigate = useNavigate();
@@ -270,6 +269,7 @@ const ProductsCard = () => {
             )}
           </Card>
         </Card>
+        <CommentsActions product={products} user={user} />
       </Container>
 
       {deleteStatus && (

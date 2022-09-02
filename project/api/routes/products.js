@@ -9,6 +9,7 @@ const {
   editProduct,
   searchProducts,
   createProduct,
+  getProductComments,
 } = require("../controllers/products");
 
 //RUTA QUE DEVUELVA TODOS LOS PRODUCTOS
@@ -23,5 +24,7 @@ router.put("/:id", editProduct);
 router.get("/search/:query", searchProducts);
 //RUTA PARA AGREGAR UN PRODUCTO
 router.post("/", createProduct);
+//RUTA PARA TRAER COMENTARIOS DE UN PRODUCTO
+router.get("/:id/comments", getProductComments);
 
 module.exports = router;

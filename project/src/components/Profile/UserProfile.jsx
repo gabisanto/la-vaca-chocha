@@ -46,23 +46,25 @@ const UserProfile = ({ user }) => {
                 Mis compras
               </Button>
             </Link>
-            <Button
-              type="submit"
-              variant="contained"
-              fullWidth
-              size="large"
-              sx={{
-                fontWeight: "bold",
-                marginBottom: 1,
-                backgroundColor: "#03A696",
-                "&:hover": {
-                  backgroundColor: "#04BF9D",
-                  color: "#757575",
-                },
-              }}
-            >
-              Mis comentarios
-            </Button>
+            <Link to={`/comments`} style={{ textDecoration: "none" }}>
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                size="large"
+                sx={{
+                  fontWeight: "bold",
+                  marginBottom: 1,
+                  backgroundColor: "#03A696",
+                  "&:hover": {
+                    backgroundColor: "#04BF9D",
+                    color: "#757575",
+                  },
+                }}
+              >
+                Mis comentarios
+              </Button>
+            </Link>
             <Link to="/favorites" style={{ textDecoration: "none" }}>
               <Button
                 type="submit"
