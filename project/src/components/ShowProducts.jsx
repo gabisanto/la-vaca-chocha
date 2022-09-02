@@ -36,7 +36,7 @@ const ShowProducts = () => {
   const productsPerPage = 5;
   const pagesVisited = pageNumber * productsPerPage;
 
-  const displayProducts = filterProducts.slice(
+  const displayProducts = products.slice(
     pagesVisited,
     pagesVisited + productsPerPage
   );
@@ -76,11 +76,11 @@ const ShowProducts = () => {
         }
       />
       <Container sx={{ p: "0 5", backgroundColor: "#e0e0e0", borderRadius: 1 }}>
-        <SelectFilter
+        {/* <SelectFilter
           products={products}
           label={"Ordenar por"}
           stateChanger={setFilterProducts}
-        />
+        /> */}
         <Grid container my={4} sx={{ mb: 0 }}>
           {displayProducts?.map((producto) => {
             return (
