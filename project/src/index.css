@@ -7,12 +7,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(224, 224, 224);
+  background-color: #e0e0e0;
 }
 
 html,
 body {
   height: 100%;
+  background-color: #e0e0e0;
 }
 
 code {
