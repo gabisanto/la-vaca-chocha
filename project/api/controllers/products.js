@@ -1,4 +1,5 @@
 const Products = require("../models/Products.js");
+const Comments = require("../models/Comments.js");
 const { Op } = require("sequelize");
 
 const getProducts = async (req, res, next) => {
@@ -77,10 +78,20 @@ const searchProducts = async (req, res, next) => {
 
 const createProduct = async (req, res, next) => {
   const { category } = req.body;
-  console.log(category);
+
   try {
     const product = await Products.create(req.body);
     res.send(product);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getProductComments = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const comments = await Comments.findAll({ where: { idProduct: id } });
+    res.send(comments);
   } catch (error) {
     console.log(error);
   }
@@ -93,4 +104,5 @@ module.exports = {
   editProduct,
   searchProducts,
   createProduct,
+  getProductComments,
 };

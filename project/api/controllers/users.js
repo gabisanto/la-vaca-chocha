@@ -1,5 +1,6 @@
 const Users = require("../models/Users.js");
 const Favorites = require("../models/Favorites");
+const Comments = require("../models/Comments");
 const Cart = require("../models/Cart");
 const { generateToken, validateToken } = require("../config/tokens");
 const { findOne } = require("../models/Users.js");
@@ -75,7 +76,7 @@ const login = async (req, res) => {
   try {
     const user = await Users.findOne({
       where: { email },
-      include: "favorites",
+      include: ["favorites", "comments"],
     });
     const cart = await Cart.findOne({
       where: {
@@ -95,6 +96,7 @@ const login = async (req, res) => {
         isAdmin: user.isAdmin,
         favorites: user.favorites,
         cart: cart && cart.products.length > 0 ? cart : [],
+        comments: user.comments,
       };
       const token = generateToken(payload);
       res.send({ payload, token });
@@ -194,6 +196,23 @@ const logout = async (req, res) => {
   }
 };
 
+const addComment = (req, res) => {
+  const { userId, product, comment } = req.body;
+  Comments.create({
+    idProduct: product.id,
+    userId: userId,
+    comment: comment,
+  })
+    .then((newc) => res.send(newc))
+    .catch((e) => console.log(e));
+};
+
+const getAllComments = (req, res) => {
+  Comments.findAll()
+    .then((comm) => res.send(comm))
+    .catch((e) => console.log(e));
+};
+
 module.exports = {
   getAllUser,
   getUserById,
@@ -206,4 +225,6 @@ module.exports = {
   addFavorites,
   deleteFavorites,
   logout,
+  addComment,
+  getAllComments,
 };

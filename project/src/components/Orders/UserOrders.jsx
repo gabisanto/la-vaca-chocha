@@ -29,7 +29,7 @@ const MisCompras = () => {
   }, []);
 
   return (
-    <div style={{ backgroundColor: "#e0e0e0", height: "100%" }}>
+    <div style={{ backgroundColor: "#e0e0e0", height: "130vh" }}>
       <Banner
         text={"Mis compras"}
         image={

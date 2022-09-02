@@ -13,7 +13,9 @@ const {
   addFavorites,
   deleteFavorites,
   getFavorites,
-  logout
+  logout,
+  addComment,
+  getAllComments,
 } = require("../controllers/users");
 //USERS
 router.get("/me", validateAuth, getProfile);
@@ -28,4 +30,7 @@ router.delete("/:id", deleteUser);
 router.post("/favorites", addFavorites);
 router.get("/favorites/:id", getFavorites);
 router.post("/favorites/delete", deleteFavorites);
+//COMMENTS
+router.post("/comment", addComment);
+router.get("/comment/all", getAllComments);
 module.exports = router;
